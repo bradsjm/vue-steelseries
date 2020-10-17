@@ -19,32 +19,7 @@ import {
   TickLabelOrientation,
 } from "steelseries";
 
-function toBoolean(value) {
-  if (undefined === value) return value;
-  switch (
-    value
-      .toString()
-      .toLowerCase()
-      .trim()
-  ) {
-    case "true":
-    case "yes":
-    case "1":
-      return true;
-    case "false":
-    case "no":
-    case "0":
-    case null:
-      return false;
-    default:
-      return Boolean(value);
-  }
-}
-
-function toNumber(value) {
-  if (undefined === value) return value;
-  return Number(value);
-}
+import { toBoolean, toNumber } from "./util";
 
 export default {
   name: "Radial",
@@ -232,7 +207,7 @@ export default {
       default: undefined,
       required: false,
       type: [Number, String],
-      validator: (value) => !Number.isNaN(value),
+      validator: (value) => toNumber(value) > 0,
     },
     threshold: {
       default: undefined,
@@ -295,9 +270,7 @@ export default {
     value: {
       required: true,
       type: [Number, String],
-      validator: function(value) {
-        return !Number.isNaN(value);
-      },
+      validator: (value) => !Number.isNaN(value),
     },
   },
   data() {
@@ -364,7 +337,7 @@ export default {
       this.gauge && this.gauge.setBackgroundColor(BackgroundColor[newValue]);
     },
     fractionalScaleDecimals(newValue) {
-      this.gauge && this.gauge.setFractionalScaleDecimals(newValue);
+      this.gauge && this.gauge.setFractionalScaleDecimals(toNumber(newValue));
     },
     frameDesign(newValue) {
       this.gauge && this.gauge.setFrameDesign(FrameDesign[newValue]);
@@ -380,31 +353,31 @@ export default {
       this.gauge && this.gauge.setLcdColor(LcdColor[newValue]);
     },
     lcdDecimals(newValue) {
-      this.gauge && this.gauge.setLcdDecimals(newValue);
+      this.gauge && this.gauge.setLcdDecimals(toNumber(newValue));
     },
     ledColor(newValue) {
       this.gauge && this.gauge.setLedColor(LedColor[newValue]);
     },
     maxMeasuredValue(newValue) {
-      this.gauge && this.gauge.setMaxMeasuredValue(newValue);
+      this.gauge && this.gauge.setMaxMeasuredValue(toNumber(newValue));
     },
     maxMeasuredValueVisible(newValue) {
-      this.gauge && this.gauge.setMaxMeasuredValueVisible(newValue);
+      this.gauge && this.gauge.setMaxMeasuredValueVisible(toNumber(newValue));
     },
     maxValue(newValue) {
-      this.gauge && this.gauge.setMaxValue(newValue);
+      this.gauge && this.gauge.setMaxValue(toNumber(newValue));
     },
     minMeasuredValue(newValue) {
-      this.gauge && this.gauge.setMinMeasuredValue(newValue);
+      this.gauge && this.gauge.setMinMeasuredValue(toNumber(newValue));
     },
     minMeasuredValueVisible(newValue) {
-      this.gauge && this.gauge.setMinMeasuredValueVisible(newValue);
+      this.gauge && this.gauge.setMinMeasuredValueVisible(toNumber(newValue));
     },
     minValue(newValue) {
-      this.gauge && this.gauge.setMinValue(newValue);
+      this.gauge && this.gauge.setMinValue(toNumber(newValue));
     },
     odometerValue(newValue) {
-      this.gauge && this.gauge.setOdoValue(newValue);
+      this.gauge && this.gauge.setOdoValue(toNumber(newValue));
     },
     pointerColor(newValue) {
       this.gauge && this.gauge.setPointerColor(ColorDef[newValue]);
@@ -416,13 +389,13 @@ export default {
       this.draw();
     },
     threshold(newValue) {
-      this.gauge && this.gauge.setThreshold(newValue);
+      this.gauge && this.gauge.setThreshold(toNumber(newValue));
     },
     thresholdRising(newValue) {
-      this.gauge && this.gauge.setThresholdRising(newValue);
+      this.gauge && this.gauge.setThresholdRising(toBoolean(newValue));
     },
     thresholdVisible(newValue) {
-      this.gauge && this.gauge.setThresholdVisible(newValue);
+      this.gauge && this.gauge.setThresholdVisible(toBoolean(newValue));
     },
     title(newValue) {
       this.gauge && this.gauge.setTitleString(newValue);
@@ -440,7 +413,7 @@ export default {
       this.gauge && this.gauge.setUserLedVisible(toBoolean(newValue));
     },
     value(newValue) {
-      this.gauge && this.gauge.setValueAnimated(newValue);
+      this.gauge && this.gauge.setValueAnimated(toNumber(newValue));
     },
   },
 };

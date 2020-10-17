@@ -11,32 +11,7 @@ import {
   ForegroundType,
 } from "steelseries";
 
-function toBoolean(value) {
-  if (undefined === value) return value;
-  switch (
-    value
-      .toString()
-      .toLowerCase()
-      .trim()
-  ) {
-    case "true":
-    case "yes":
-    case "1":
-      return true;
-    case "false":
-    case "no":
-    case "0":
-    case null:
-      return false;
-    default:
-      return Boolean(value);
-  }
-}
-
-function toNumber(value) {
-  if (undefined === value) return value;
-  return Number(value);
-}
+import { toBoolean, toNumber } from "./util";
 
 export default {
   name: "Level",
@@ -104,7 +79,7 @@ export default {
       default: undefined,
       required: false,
       type: [Number, String],
-      validator: (value) => !Number.isNaN(value),
+      validator: (value) => toNumber(value) > 0,
     },
     textOrientationFixed: {
       default: undefined,
@@ -138,7 +113,7 @@ export default {
         size: toNumber(this.size),
         textOrientationFixed: toBoolean(this.textOrientationFixed),
       });
-      this.value && this.gauge.setValue(this.value);
+      this.value && this.gauge.setValue(toNumber(this.value));
     },
   },
   mounted() {
@@ -161,7 +136,7 @@ export default {
       this.draw();
     },
     value(newValue) {
-      this.gauge && this.gauge.setValueAnimated(newValue);
+      this.gauge && this.gauge.setValueAnimated(toNumber(newValue));
     },
   },
 };

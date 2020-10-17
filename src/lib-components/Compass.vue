@@ -14,27 +14,7 @@ import {
   ForegroundType,
 } from "steelseries";
 
-function toBoolean(value) {
-  if (undefined === value) return value;
-  switch (
-    value
-      .toString()
-      .toLowerCase()
-      .trim()
-  ) {
-    case "true":
-    case "yes":
-    case "1":
-      return true;
-    case "false":
-    case "no":
-    case "0":
-    case null:
-      return false;
-    default:
-      return Boolean(value);
-  }
-}
+import { toBoolean, toNumber } from "./util";
 
 export default {
   name: "Compass",
@@ -137,13 +117,14 @@ export default {
       default: undefined,
       required: false,
       type: [Number, String],
-      validator: (value) => !Number.isNaN(value),
+      validator: (value) => toNumber(value) > 0,
     },
     // 1-360 are used for directions
     // 0 is used as a special case to indicate 'calm'
     value: {
       required: true,
-      type: Number,
+      type: [Number, String],
+      validator: (value) => !Number.isNaN(value),
     },
   },
   data() {
@@ -157,7 +138,7 @@ export default {
         backgroundColor: BackgroundColor[this.backgroundColor],
         backgroundVisible: toBoolean(this.backgroundVisible),
         customLayer: this.customLayer,
-        degreeScale: this.degreeScale,
+        degreeScale: toBoolean(this.degreeScale),
         foregroundType: ForegroundType[this.foregroundType],
         foregroundVisible: toBoolean(this.foregroundVisible),
         frameDesign: FrameDesign[this.frameDesign],
@@ -170,9 +151,9 @@ export default {
         pointSymbolsVisible: toBoolean(this.pointSymbolsVisible),
         roseVisible: toBoolean(this.roseVisible),
         rotateFace: toBoolean(this.rotateFace),
-        size: undefined === this.size ? undefined : Number(this.size),
+        size: toNumber(this.size),
       });
-      this.value && this.gauge.setValue(this.value);
+      this.value && this.gauge.setValue(toNumber(this.value));
     },
   },
   mounted() {
@@ -201,7 +182,7 @@ export default {
       this.draw();
     },
     value(newValue) {
-      this.gauge && this.gauge.setValueAnimated(newValue);
+      this.gauge && this.gauge.setValueAnimated(toNumber(newValue));
     },
   },
 };

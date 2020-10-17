@@ -5,32 +5,7 @@
 <script>
 import { LightBulb } from "steelseries";
 
-function toBoolean(value) {
-  if (undefined === value) return value;
-  switch (
-    value
-      .toString()
-      .toLowerCase()
-      .trim()
-  ) {
-    case "true":
-    case "yes":
-    case "1":
-      return true;
-    case "false":
-    case "no":
-    case "0":
-    case null:
-      return false;
-    default:
-      return Boolean(value);
-  }
-}
-
-function toNumber(value) {
-  if (undefined === value) return value;
-  return Number(value);
-}
+import { toBoolean, toNumber } from "./util";
 
 export default {
   name: "LightBulb",
@@ -49,19 +24,19 @@ export default {
       default: undefined,
       required: false,
       type: [Number, String],
-      validator: (value) => !Number.isNaN(value),
+      validator: (value) => toNumber(value) > 0,
     },
     height: {
       default: undefined,
       required: false,
       type: [Number, String],
-      validator: (value) => !Number.isNaN(value),
+      validator: (value) => toNumber(value) > 0,
     },
     width: {
       default: undefined,
       required: false,
       type: [Number, String],
-      validator: (value) => !Number.isNaN(value),
+      validator: (value) => toNumber(value) > 0,
     },
     value: {
       required: true,
@@ -90,7 +65,7 @@ export default {
   },
   watch: {
     alpha(newValue) {
-      this.gauge && this.gauge.setAlpha(newValue);
+      this.gauge && this.gauge.setAlpha(toNumber(newValue));
     },
     glowColor(newValue) {
       this.gauge && this.gauge.setGlowColor(newValue);

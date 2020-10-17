@@ -5,32 +5,7 @@
 <script>
 import { TrafficLight } from "steelseries";
 
-function toBoolean(value) {
-  if (undefined === value) return value;
-  switch (
-    value
-      .toString()
-      .toLowerCase()
-      .trim()
-  ) {
-    case "true":
-    case "yes":
-    case "1":
-      return true;
-    case "false":
-    case "no":
-    case "0":
-    case null:
-      return false;
-    default:
-      return Boolean(value);
-  }
-}
-
-function toNumber(value) {
-  if (undefined === value) return value;
-  return Number(value);
-}
+import { toBoolean, toNumber } from "./util";
 
 export default {
   name: "TrafficLight",
@@ -39,13 +14,19 @@ export default {
       default: undefined,
       required: false,
       type: [Number, String],
-      validator: (value) => !Number.isNaN(value),
+      validator: (value) => toNumber(value) > 0,
     },
     width: {
       default: undefined,
       required: false,
       type: [Number, String],
-      validator: (value) => !Number.isNaN(value),
+      validator: (value) => toNumber(value) > 0,
+    },
+    size: {
+      default: undefined,
+      required: false,
+      type: [Number, String],
+      validator: (value) => toNumber(value) > 0,
     },
     red: {
       default: undefined,
@@ -71,8 +52,8 @@ export default {
   methods: {
     draw: function() {
       this.gauge = new TrafficLight(this.$refs["view"], {
-        height: toNumber(this.height),
-        width: toNumber(this.width),
+        height: this.height ? toNumber(this.height) : toNumber(this.size),
+        width: this.width ? toNumber(this.width) : toNumber(this.size),
       });
       this.red && this.gauge.setRedOn(toBoolean(this.red));
       this.amber && this.gauge.setAmberOn(toBoolean(this.amber));
@@ -90,13 +71,13 @@ export default {
       this.draw();
     },
     red(newValue) {
-      this.gauge.setRedOn(newValue);
+      this.gauge.setRedOn(toBoolean(newValue));
     },
     amber(newValue) {
-      this.gauge.setAmberOn(newValue);
+      this.gauge.setAmberOn(toBoolean(newValue));
     },
     green(newValue) {
-      this.gauge.setGreenOn(newValue);
+      this.gauge.setGreenOn(toBoolean(newValue));
     },
   },
 };

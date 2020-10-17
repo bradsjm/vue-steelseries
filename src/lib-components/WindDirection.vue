@@ -15,27 +15,7 @@ import {
   ForegroundType,
 } from "steelseries";
 
-function toBoolean(value) {
-  if (undefined === value) return value;
-  switch (
-    value
-      .toString()
-      .toLowerCase()
-      .trim()
-  ) {
-    case "true":
-    case "yes":
-    case "1":
-      return true;
-    case "false":
-    case "no":
-    case "0":
-    case null:
-      return false;
-    default:
-      return Boolean(value);
-  }
-}
+import { toBoolean, toNumber } from "./util";
 
 export default {
   name: "WindDirection",
@@ -150,21 +130,21 @@ export default {
       type: String,
       validator: (value) => value in ColorDef,
     },
-    pointerColorAverage: {
+    averagePointerColor: {
       default: undefined,
       required: false,
       type: String,
       validator: (value) => value in ColorDef,
     },
     // TYPE1 through TYPE16
-    pointerTypeAverage: {
+    averagePointerType: {
       default: undefined,
       required: false,
       type: String,
       validator: (value) => value in PointerType,
     },
     // TYPE1 through TYPE16
-    pointerTypeLatest: {
+    pointerType: {
       default: undefined,
       required: false,
       type: String,
@@ -189,7 +169,7 @@ export default {
       default: undefined,
       required: false,
       type: [Number, String],
-      validator: (value) => !Number.isNaN(value),
+      validator: (value) => toNumber(value) > 0,
     },
     title: {
       default: undefined,
@@ -233,9 +213,9 @@ export default {
         lcdTitleStrings: this.lcdTitleStrings,
         lcdVisible: toBoolean(this.lcdVisible),
         pointerColor: ColorDef[this.pointerColor],
-        pointerColorAverage: ColorDef[this.pointerColorAverage],
-        pointerTypeAverage: PointerType[this.pointerTypeAverage],
-        pointerTypeLatest: PointerType[this.pointerTypeLatest],
+        pointerColorAverage: ColorDef[this.averagePointerColor],
+        pointerTypeAverage: PointerType[this.averagePointerType],
+        pointerTypeLatest: PointerType[this.pointerType],
         pointSymbols: this.pointSymbols,
         pointSymbolsVisible: toBoolean(this.pointSymbolsVisible),
         roseVisible: toBoolean(this.roseVisible),
@@ -252,7 +232,7 @@ export default {
   },
   watch: {
     average(newValue) {
-      this.gauge && this.gauge.setValueAnimatedAverage(newValue);
+      this.gauge && this.gauge.setValueAnimatedAverage(toNumber(newValue));
     },
     backgroundColor(newValue) {
       this.gauge && this.gauge.setBackgroundColor(BackgroundColor[newValue]);
@@ -272,7 +252,7 @@ export default {
     pointerColor(newValue) {
       this.gauge && this.gauge.setPointerColor(ColorDef[newValue]);
     },
-    pointerColorAverage(newValue) {
+    averagePointerColor(newValue) {
       this.gauge && this.gauge.setPointerColorAverage(ColorDef[newValue]);
     },
     pointSymbols(newValue) {
@@ -281,14 +261,14 @@ export default {
     pointerType(newValue) {
       this.gauge && this.gauge.setPointerType(PointerType[newValue]);
     },
-    pointerTypeAverage(newValue) {
+    averagePointerType(newValue) {
       this.gauge && this.gauge.setPointerTypeAverage(PointerType[newValue]);
     },
     size() {
       this.draw();
     },
     value(newValue) {
-      this.gauge && this.gauge.setValueAnimatedLatest(newValue);
+      this.gauge && this.gauge.setValueAnimatedLatest(toNumber(newValue));
     },
   },
 };

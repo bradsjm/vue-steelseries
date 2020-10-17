@@ -6,10 +6,7 @@
         <td>Background Color</td>
         <td>Foreground Type</td>
         <td>Pointer Color</td>
-        <td>Avg Pointer Color</td>
         <td>Pointer Type</td>
-        <td>LCD Color</td>
-        <td>LED Color</td>
       </tr>
       <tr>
         <td>
@@ -80,6 +77,35 @@
           </select>
         </td>
         <td>
+          <select v-model="pointerType">
+            <option disabled value="">Please select one</option>
+            <option value="TYPE1">Type 1</option>
+            <option value="TYPE2">Type 2</option>
+            <option value="TYPE3">Type 3</option>
+            <option value="TYPE4">Type 4</option>
+            <option value="TYPE5">Type 5</option>
+            <option value="TYPE6">Type 6</option>
+            <option value="TYPE7">Type 7</option>
+            <option value="TYPE8">Type 8</option>
+            <option value="TYPE9">Type 9</option>
+            <option value="TYPE10">Type 10</option>
+            <option value="TYPE11">Type 11</option>
+            <option value="TYPE12">Type 12</option>
+            <option value="TYPE13">Type 13</option>
+            <option value="TYPE14">Type 14</option>
+            <option value="TYPE15">Type 15</option>
+            <option value="TYPE16">Type 16</option>
+          </select>
+        </td>
+      </tr>
+      <tr>
+        <td>Avg Pointer Color</td>
+        <td>Avg Pointer Type</td>
+        <td>LCD Color</td>
+        <td>LED Color</td>
+      </tr>
+      <tr>
+        <td>
           <select v-model="avgPointerColor">
             <option disabled value="">Please select one</option>
             <option value="RED">Red</option>
@@ -98,7 +124,7 @@
           </select>
         </td>
         <td>
-          <select v-model="pointerType">
+          <select v-model="avgPointerType">
             <option disabled value="">Please select one</option>
             <option value="TYPE1">Type 1</option>
             <option value="TYPE2">Type 2</option>
@@ -167,7 +193,7 @@
     <table width="100%">
       <tr>
         <td align="center" colspan="2"><b>Compass</b></td>
-        <td align="center" colspan="2"><b>Level</b></td>
+        <td align="center" colspan="2"><b>WindDirection</b></td>
       </tr>
       <tr>
         <td align="center">
@@ -190,6 +216,7 @@
             :pointerColor="pointerColor"
             :pointerType="pointerType"
             :value="gauges.winddir.value"
+            degreeScale="true"
             rotateFace="true"
           />
         </td>
@@ -201,7 +228,8 @@
             :foregroundType="foregroundType"
             :pointerColor="pointerColor"
             :pointerType="pointerType"
-            :avgPointerColor="avgPointerColor"
+            :averagePointerColor="avgPointerColor"
+            :averagePointerType="avgPointerType"
             :lcdColor="lcdColor"
             :value="gauges.winddir.value"
             :average="gauges.windavg.value"
@@ -215,7 +243,8 @@
             :foregroundType="foregroundType"
             :pointerColor="pointerColor"
             :pointerType="pointerType"
-            :avgPointerColor="avgPointerColor"
+            :averagePointerColor="avgPointerColor"
+            :averagePointerType="avgPointerType"
             :lcdColor="lcdColor"
             :value="gauges.winddir.value"
             :average="gauges.windavg.value"
@@ -569,8 +598,10 @@ export default Vue.extend({
       pointerColor: undefined,
       pointerType: undefined,
       avgPointerColor: undefined,
+      avgPointerType: undefined,
       lcdColor: undefined,
       ledColor: undefined,
+      interval: undefined,
       odometerValue: 0,
       gauges: {
         winddir: {
@@ -616,15 +647,15 @@ export default Vue.extend({
       for (const [k, v] of Object.entries(this.gauges)) {
         v.value = v.min + Math.random() * (v.max - v.min);
       }
-      this.odometerValue += Math.random() * 50;
+      this.odometerValue += Math.random() * 10;
     },
   },
-  created() {
+  mounted() {
     this.update();
-    this.$options.interval = setInterval(this.update, 5000);
+    this.interval = setInterval(this.update, 5000);
   },
   beforeDestroy() {
-    clearInterval(this.$options.interval);
+    clearInterval(this.interval);
   },
 });
 </script>

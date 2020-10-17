@@ -5,10 +5,7 @@
 <script>
 import { Odometer } from "steelseries";
 
-function toNumber(value) {
-  if (undefined === value) return value;
-  return Number(value);
-}
+import { toNumber } from "./util";
 
 export default {
   name: "Odometer",
@@ -44,7 +41,7 @@ export default {
       default: undefined,
       required: false,
       type: [Number, String],
-      validator: (value) => !Number.isNaN(value),
+      validator: (value) => toNumber(value) > 0,
     },
     value: {
       required: true,
@@ -97,7 +94,7 @@ export default {
       this.draw();
     },
     value(newValue) {
-      this.gauge && this.gauge.setValueAnimated(Number(newValue));
+      this.gauge && this.gauge.setValueAnimated(toNumber(newValue));
     },
   },
 };

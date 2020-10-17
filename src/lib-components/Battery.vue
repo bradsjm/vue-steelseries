@@ -5,6 +5,8 @@
 <script>
 import { Battery } from "steelseries";
 
+import { toBoolean, toNumber } from "./util";
+
 export default {
   name: "Battery",
   props: {
@@ -12,7 +14,7 @@ export default {
       default: undefined,
       required: false,
       type: [Number, String],
-      validator: (value) => !Number.isNaN(value),
+      validator: (value) => toNumber(value) > 0,
     },
     value: {
       required: true,
@@ -28,8 +30,8 @@ export default {
   methods: {
     draw: function() {
       this.gauge = new Battery(this.$refs["view"], {
-        size: undefined === this.size ? undefined : Number(this.size),
-        value: undefined === this.value ? undefined : Number(this.value),
+        size: toNumber(this.size),
+        value: toNumber(this.value),
       });
     },
   },
@@ -41,7 +43,7 @@ export default {
       this.draw();
     },
     value(newValue) {
-      this.gauge && this.gauge.setValue(newValue);
+      this.gauge && this.gauge.setValue(toNumber(newValue));
     },
   },
 };

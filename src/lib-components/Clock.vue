@@ -12,32 +12,7 @@ import {
   ForegroundType,
 } from "steelseries";
 
-function toBoolean(value) {
-  if (undefined === value) return value;
-  switch (
-    value
-      .toString()
-      .toLowerCase()
-      .trim()
-  ) {
-    case "true":
-    case "yes":
-    case "1":
-      return true;
-    case "false":
-    case "no":
-    case "0":
-    case null:
-      return false;
-    default:
-      return Boolean(value);
-  }
-}
-
-function toNumber(value) {
-  if (undefined === value) return value;
-  return Number(value);
-}
+import { toBoolean, toNumber } from "./util";
 
 export default {
   name: "Clock",
@@ -118,7 +93,7 @@ export default {
       default: undefined,
       required: false,
       type: [Number, String],
-      validator: (value) => !Number.isNaN(value),
+      validator: (value) => toNumber(value) > 0,
     },
     second: {
       default: undefined,
@@ -192,13 +167,13 @@ export default {
       this.gauge && this.gauge.setFrameDesign(FrameDesign[newValue]);
     },
     hour(newValue) {
-      this.gauge && this.gauge.setHour(newValue);
+      this.gauge && this.gauge.setHour(toNumber(newValue));
     },
     isAutomatic(newValue) {
       this.gauge && this.gauge.setAutomatic(toBoolean(newValue));
     },
     minute(newValue) {
-      this.gauge && this.gauge.setMinute(newValue);
+      this.gauge && this.gauge.setMinute(toNumber(newValue));
     },
     pointerColor(newValue) {
       this.gauge && this.gauge.setPointerColor(ColorDef[newValue]);
@@ -207,7 +182,7 @@ export default {
       this.gauge && this.gauge.setPointerType(PointerType[newValue]);
     },
     second(newValue) {
-      this.gauge && this.gauge.setSecond(newValue);
+      this.gauge && this.gauge.setSecond(toNumber(newValue));
     },
     secondMovesContinuous(newValue) {
       this.gauge && this.gauge.setSecondMovesContinuous(toBoolean(newValue));
@@ -219,10 +194,10 @@ export default {
       this.draw();
     },
     timeZoneOffsetHour(newValue) {
-      this.gauge && this.gauge.setTimeZoneOffsetHour(newValue);
+      this.gauge && this.gauge.setTimeZoneOffsetHour(toNumber(newValue));
     },
     timeZoneOffsetMinute(newValue) {
-      this.gauge && this.gauge.setTimeZoneOffsetMinute(newValue);
+      this.gauge && this.gauge.setTimeZoneOffsetMinute(toNumber(newValue));
     },
   },
 };

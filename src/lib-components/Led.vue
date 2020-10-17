@@ -5,27 +5,7 @@
 <script>
 import { Led, LedColor } from "steelseries";
 
-function toBoolean(value) {
-  if (undefined === value) return value;
-  switch (
-    value
-      .toString()
-      .toLowerCase()
-      .trim()
-  ) {
-    case "true":
-    case "yes":
-    case "1":
-      return true;
-    case "false":
-    case "no":
-    case "0":
-    case null:
-      return false;
-    default:
-      return Boolean(value);
-  }
-}
+import { toBoolean, toNumber } from "./util";
 
 export default {
   name: "Led",
@@ -45,7 +25,7 @@ export default {
       default: undefined,
       required: false,
       type: [Number, String],
-      validator: (value) => !Number.isNaN(value),
+      validator: (value) => toNumber(value) > 0,
     },
     value: {
       required: true,
@@ -60,7 +40,7 @@ export default {
   methods: {
     draw: function() {
       this.gauge = new Led(this.$refs["view"], {
-        size: undefined === this.size ? undefined : Number(this.size),
+        size: toNumber(this.size),
         ledColor: LedColor[this.ledColor],
       });
       this.gauge.setLedOnOff(toBoolean(this.value));
@@ -80,7 +60,7 @@ export default {
       this.draw();
     },
     ledColor(newValue) {
-      this.gauge && this.gauge.setLedColor(newValue);
+      this.gauge && this.gauge.setLedColor(LedColor[newValue]);
     },
     value(newValue) {
       this.gauge && this.gauge.setLedOnOff(toBoolean(newValue));

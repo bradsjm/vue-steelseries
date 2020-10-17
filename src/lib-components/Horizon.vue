@@ -5,32 +5,7 @@
 <script>
 import { Horizon, ColorDef, FrameDesign, ForegroundType } from "steelseries";
 
-function toBoolean(value) {
-  if (undefined === value) return value;
-  switch (
-    value
-      .toString()
-      .toLowerCase()
-      .trim()
-  ) {
-    case "true":
-    case "yes":
-    case "1":
-      return true;
-    case "false":
-    case "no":
-    case "0":
-    case null:
-      return false;
-    default:
-      return Boolean(value);
-  }
-}
-
-function toNumber(value) {
-  if (undefined === value) return value;
-  return Number(value);
-}
+import { toBoolean, toNumber } from "./util";
 
 export default {
   name: "Horizon",
@@ -86,7 +61,7 @@ export default {
       default: undefined,
       required: false,
       type: [Number, String],
-      validator: (value) => !Number.isNaN(value),
+      validator: (value) => toNumber(value) > 0,
     },
   },
   data() {
@@ -104,9 +79,9 @@ export default {
         pointerColor: ColorDef[this.pointerColor],
         size: toNumber(this.size),
       });
-      this.roll && this.gauge.setRoll(this.roll);
-      this.pitch && this.gauge.setPitch(this.pitch);
-      this.pitchOffset && this.gauge.setPitchOffset(this.pitchOffset);
+      this.roll && this.gauge.setRoll(toNumber(this.roll));
+      this.pitch && this.gauge.setPitch(toNumber(this.pitch));
+      this.pitchOffset && this.gauge.setPitchOffset(toNumber(this.pitchOffset));
     },
   },
   mounted() {
@@ -123,13 +98,13 @@ export default {
       this.gauge && this.gauge.setPointerColor(ColorDef[newValue]);
     },
     roll(newValue) {
-      this.gauge && this.gauge.setRollAnimated(newValue);
+      this.gauge && this.gauge.setRollAnimated(toNumber(newValue));
     },
     pitch(newValue) {
-      this.gauge && this.gauge.setPitchAnimated(newValue);
+      this.gauge && this.gauge.setPitchAnimated(toNumber(newValue));
     },
     pitchOffset(newValue) {
-      this.gauge && this.gauge.setPitchOffset(newValue);
+      this.gauge && this.gauge.setPitchOffset(toNumber(newValue));
     },
     size() {
       this.draw();
