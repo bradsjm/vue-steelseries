@@ -37,6 +37,12 @@ export default {
       required: false,
       type: String,
     },
+    height: {
+      default: undefined,
+      required: false,
+      type: [Number, String],
+      validator: (value) => toNumber(value) > 0,
+    },
     size: {
       default: undefined,
       required: false,
@@ -73,7 +79,7 @@ export default {
   methods: {
     draw: function() {
       this.gauge = new Odometer(this.$refs["view"], {
-        height: toNumber(this.size),
+        height: this.height ? toNumber(this.height) : toNumber(this.size),
         digits: toNumber(this.digits),
         decimals: toNumber(this.decimals),
         decimalBackColor: this.backgroundColor,

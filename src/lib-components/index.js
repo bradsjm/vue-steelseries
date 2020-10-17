@@ -3,6 +3,7 @@ export { default as Altimeter } from "./Altimeter.vue";
 export { default as Battery } from "./Battery.vue";
 export { default as Clock } from "./Clock.vue";
 export { default as Compass } from "./Compass.vue";
+export { default as DisplaySingle } from "./DisplaySingle.vue";
 export { default as Horizon } from "./Horizon.vue";
 export { default as Led } from "./Led.vue";
 export { default as Level } from "./Level.vue";

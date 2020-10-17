@@ -665,6 +665,7 @@
         <td align="center"><b>StopWatch</b></td>
         <td align="center"><b>LightBulb</b></td>
         <td align="center"><b>TrafficLight</b></td>
+        <td align="center"><b>Battery</b></td>
       </tr>
       <tr>
         <td align="center">
@@ -692,6 +693,32 @@
             :pointerColor="pointerColor"
           />
         </td>
+        <td align="center">
+          <Battery size="100" :value="gauges.linear.value" />
+        </td>
+      </tr>
+      <tr>
+        <td align="center"><b>LED</b></td>
+        <td align="center"><b>Odometer</b></td>
+        <td align="center"><b>DisplaySingle</b></td>
+        <td align="center"><b></b></td>
+      </tr>
+      <tr>
+        <td align="center">
+          <Led size="100" :value="bulb" />
+        </td>
+        <td align="center">
+          <Odometer height="50" wobbleFactor="0" :value="odometerValue" />
+        </td>
+        <td align="center">
+          <DisplaySingle
+            width="120"
+            height="50"
+            valuesNumeric="true"
+            lcdDecimals="1"
+            :value="odometerValue"
+          />
+        </td>
       </tr>
     </table>
   </div>
@@ -704,6 +731,7 @@ import {
   Battery,
   Clock,
   Compass,
+  DisplaySingle,
   Horizon,
   Led,
   Level,
@@ -726,6 +754,7 @@ export default Vue.extend({
     Battery,
     Clock,
     Compass,
+    DisplaySingle,
     Horizon,
     Led,
     Level,
