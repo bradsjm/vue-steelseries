@@ -70,12 +70,12 @@ export default {
       type: [Number, String],
       validator: (value) => !Number.isNaN(value),
     },
-    // TYPE1 through TYPE5
+    // TYPE1 or TYPE2 only
     gaugeType: {
       default: undefined,
       required: false,
       type: String,
-      validator: (value) => value in GaugeType,
+      validator: (value) => ["TYPE1", "TYPE2"].includes(value),
     },
     height: {
       default: undefined,
@@ -88,17 +88,28 @@ export default {
       required: false,
       type: String,
     },
-    ledColor: {
+    lcdColor: {
       default: undefined,
       required: false,
       type: String,
-      validator: (value) => value in LedColor,
+      validator: (value) => value in LcdColor,
     },
     lcdDecimals: {
       default: undefined,
       required: false,
       type: [Number, String],
       validator: (value) => !Number.isNaN(value),
+    },
+    lcdVisible: {
+      default: undefined,
+      required: false,
+      type: [Boolean, String],
+    },
+    ledColor: {
+      default: undefined,
+      required: false,
+      type: String,
+      validator: (value) => value in LedColor,
     },
     ledVisible: {
       default: undefined,
@@ -138,7 +149,7 @@ export default {
       type: [Number, String],
       validator: (value) => toNumber(value) > 0,
     },
-    thresHold: {
+    threshold: {
       default: undefined,
       required: false,
       type: [Number, String],
@@ -241,40 +252,40 @@ export default {
       this.gauge && this.gauge.setLcdColor(LcdColor[newValue]);
     },
     lcdDecimals(newValue) {
-      this.gauge && this.gauge.setLcdDecimals(newValue);
+      this.gauge && this.gauge.setLcdDecimals(toNumber(newValue));
     },
     ledColor(newValue) {
       this.gauge && this.gauge.setLedColor(LedColor[newValue]);
     },
     maxMeasuredValue(newValue) {
-      this.gauge && this.gauge.setMaxMeasuredValue(newValue);
+      this.gauge && this.gauge.setMaxMeasuredValue(toNumber(newValue));
     },
     maxMeasuredValueVisible(newValue) {
-      this.gauge && this.gauge.setMaxMeasuredValueVisible(newValue);
+      this.gauge && this.gauge.setMaxMeasuredValueVisible(toBoolean(newValue));
     },
     maxValue(newValue) {
-      this.gauge && this.gauge.setMaxValue(newValue);
+      this.gauge && this.gauge.setMaxValue(ntoNumber(newValue));
     },
     minMeasuredValue(newValue) {
-      this.gauge && this.gauge.setMinMeasuredValue(newValue);
+      this.gauge && this.gauge.setMinMeasuredValue(toNumber(newValue));
     },
     minMeasuredValueVisible(newValue) {
-      this.gauge && this.gauge.setMinMeasuredValueVisible(newValue);
+      this.gauge && this.gauge.setMinMeasuredValueVisible(toBoolean(newValue));
     },
     minValue(newValue) {
-      this.gauge && this.gauge.setMinValue(newValue);
+      this.gauge && this.gauge.setMinValue(toNumber(newValue));
     },
     size() {
       this.draw();
     },
     threshold(newValue) {
-      this.gauge && this.gauge.setThreshold(newValue);
+      this.gauge && this.gauge.setThreshold(toNumber(newValue));
     },
     thresholdRising(newValue) {
-      this.gauge && this.gauge.setThresholdRising(newValue);
+      this.gauge && this.gauge.setThresholdRising(toBoolean(newValue));
     },
     thresholdVisible(newValue) {
-      this.gauge && this.gauge.setThresholdVisible(newValue);
+      this.gauge && this.gauge.setThresholdVisible(toBoolean(newValue));
     },
     title(newValue) {
       this.gauge && this.gauge.setTitleString(newValue);

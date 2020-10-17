@@ -76,17 +76,28 @@ export default {
       required: false,
       type: String,
     },
-    ledColor: {
+    lcdColor: {
       default: undefined,
       required: false,
       type: String,
-      validator: (value) => value in LedColor,
+      validator: (value) => value in LcdColor,
     },
     lcdDecimals: {
       default: undefined,
       required: false,
       type: [Number, String],
       validator: (value) => !Number.isNaN(value),
+    },
+    lcdVisible: {
+      default: undefined,
+      required: false,
+      type: [Boolean, String],
+    },
+    ledColor: {
+      default: undefined,
+      required: false,
+      type: String,
+      validator: (value) => value in LedColor,
     },
     ledVisible: {
       default: undefined,
@@ -227,7 +238,7 @@ export default {
       this.gauge && this.gauge.setLcdColor(LcdColor[newValue]);
     },
     lcdDecimals(newValue) {
-      this.gauge && this.gauge.setLcdDecimals(newValue);
+      this.gauge && this.gauge.setLcdDecimals(toNumber(newValue));
     },
     ledColor(newValue) {
       this.gauge && this.gauge.setLedColor(LedColor[newValue]);

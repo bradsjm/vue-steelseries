@@ -33,7 +33,7 @@ export default {
       required: false,
       type: [Boolean, String],
     },
-    amber: {
+    yellow: {
       default: undefined,
       required: false,
       type: [Boolean, String],
@@ -56,7 +56,7 @@ export default {
         width: this.width ? toNumber(this.width) : toNumber(this.size),
       });
       this.red && this.gauge.setRedOn(toBoolean(this.red));
-      this.amber && this.gauge.setAmberOn(toBoolean(this.amber));
+      this.yellow && this.gauge.setYellowOn(toBoolean(this.amber));
       this.green && this.gauge.setGreenOn(toBoolean(this.green));
     },
   },
@@ -73,8 +73,8 @@ export default {
     red(newValue) {
       this.gauge.setRedOn(toBoolean(newValue));
     },
-    amber(newValue) {
-      this.gauge.setAmberOn(toBoolean(newValue));
+    yellow(newValue) {
+      this.gauge.setYellowOn(toBoolean(newValue));
     },
     green(newValue) {
       this.gauge.setGreenOn(toBoolean(newValue));

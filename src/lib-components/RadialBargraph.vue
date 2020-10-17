@@ -118,7 +118,7 @@ export default {
       default: undefined,
       required: false,
       type: String,
-      validator: (value) => value in ColorDef,
+      validator: (value) => value in LedColor,
     },
     ledVisible: {
       default: undefined,

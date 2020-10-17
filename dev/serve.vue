@@ -543,6 +543,156 @@
           />
         </td>
       </tr>
+
+      <tr>
+        <td align="center"><b>Linear Type1</b></td>
+        <td align="center"><b>Linear Type1</b></td>
+        <td align="center"><b>Linear Type2</b></td>
+        <td align="center"><b>Linear Bargraph</b></td>
+      </tr>
+      <tr>
+        <td align="center">
+          <Linear
+            width="140"
+            height="320"
+            :frameDesign="frameDesign"
+            :backgroundColor="backgroundColor"
+            :lcdColor="lcdColor"
+            :ledColor="ledColor"
+            :valueColor="pointerColor"
+            :value="gauges.linear.value"
+            gaugeType="TYPE1"
+            title="Title"
+            unit="Type1"
+            threshold="50"
+            lcdVisible="true"
+          />
+        </td>
+        <td align="center">
+          <Linear
+            width="140"
+            height="320"
+            :frameDesign="frameDesign"
+            :backgroundColor="backgroundColor"
+            :lcdColor="lcdColor"
+            :ledColor="ledColor"
+            :valueColor="pointerColor"
+            :value="gauges.linear.value"
+            gaugeType="TYPE1"
+            title="Title"
+            unit="Type1"
+            threshold="50"
+            lcdVisible="false"
+          />
+        </td>
+        <td align="center">
+          <Linear
+            width="140"
+            height="320"
+            :frameDesign="frameDesign"
+            :backgroundColor="backgroundColor"
+            :lcdColor="lcdColor"
+            :ledColor="ledColor"
+            :valueColor="pointerColor"
+            :value="gauges.linear.value"
+            gaugeType="TYPE2"
+            title="Title"
+            unit="Type2"
+            threshold="50"
+            lcdVisible="true"
+          />
+        </td>
+        <td align="center">
+          <LinearBargraph
+            width="140"
+            height="320"
+            :frameDesign="frameDesign"
+            :backgroundColor="backgroundColor"
+            :lcdColor="lcdColor"
+            :ledColor="ledColor"
+            :valueColor="pointerColor"
+            :value="gauges.linear.value"
+            gaugeType="TYPE1"
+            title="Title"
+            unit="Type1"
+            threshold="50"
+            lcdVisible="true"
+          />
+        </td>
+      </tr>
+
+      <tr>
+        <td colspan="2" align="center"><b>Linear Type1</b></td>
+        <td colspan="2" align="center"><b>Linear Type2</b></td>
+      </tr>
+      <tr>
+        <td colspan="2" align="center">
+          <Linear
+            width="320"
+            height="140"
+            :frameDesign="frameDesign"
+            :backgroundColor="backgroundColor"
+            :lcdColor="lcdColor"
+            :ledColor="ledColor"
+            :valueColor="pointerColor"
+            :value="gauges.linear.value"
+            gaugeType="TYPE1"
+            title="Title"
+            unit="Type1"
+            threshold="50"
+            lcdVisible="true"
+          />
+        </td>
+        <td colspan="2" align="center">
+          <Linear
+            width="320"
+            height="140"
+            :frameDesign="frameDesign"
+            :backgroundColor="backgroundColor"
+            :lcdColor="lcdColor"
+            :ledColor="ledColor"
+            :valueColor="pointerColor"
+            :value="gauges.linear.value"
+            gaugeType="TYPE2"
+            title="Title"
+            unit="Type2"
+            threshold="50"
+            lcdVisible="false"
+          />
+        </td>
+      </tr>
+      <tr>
+        <td align="center"><b>StopWatch</b></td>
+        <td align="center"><b>LightBulb</b></td>
+        <td align="center"><b>TrafficLight</b></td>
+      </tr>
+      <tr>
+        <td align="center">
+          <StopWatch
+            size="201"
+            run="true"
+            :frameDesign="frameDesign"
+            :backgroundColor="backgroundColor"
+            :foregroundType="foregroundType"
+            :pointerColor="pointerColor"
+          />
+        </td>
+        <td align="center">
+          <LightBulb size="201" :value="bulb" />
+        </td>
+        <td align="center">
+          <TrafficLight
+            size="201"
+            :red="trafficlight == 1"
+            :yellow="trafficlight == 2"
+            :green="trafficlight == 3"
+            :frameDesign="frameDesign"
+            :backgroundColor="backgroundColor"
+            :foregroundType="foregroundType"
+            :pointerColor="pointerColor"
+          />
+        </td>
+      </tr>
     </table>
   </div>
 </template>
@@ -603,6 +753,8 @@ export default Vue.extend({
       ledColor: undefined,
       interval: undefined,
       odometerValue: 0,
+      bulb: false,
+      trafficlight: 1,
       gauges: {
         winddir: {
           value: 1,
@@ -639,6 +791,11 @@ export default Vue.extend({
           min: 1,
           max: 100,
         },
+        linear: {
+          value: 1,
+          min: 1,
+          max: 100,
+        },
       },
     };
   },
@@ -648,6 +805,9 @@ export default Vue.extend({
         v.value = v.min + Math.random() * (v.max - v.min);
       }
       this.odometerValue += Math.random() * 10;
+      this.bulb = !this.bulb;
+      this.trafficlight++;
+      if (this.trafficlight > 3) this.trafficlight = 1;
     },
   },
   mounted() {
