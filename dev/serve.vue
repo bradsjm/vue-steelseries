@@ -701,7 +701,7 @@
         <td align="center"><b>LED</b></td>
         <td align="center"><b>Odometer</b></td>
         <td align="center"><b>DisplaySingle</b></td>
-        <td align="center"><b></b></td>
+        <td align="center"><b>DisplayMulti</b></td>
       </tr>
       <tr>
         <td align="center">
@@ -714,8 +714,25 @@
           <DisplaySingle
             width="120"
             height="50"
+            header="Header"
+            headerVisible="true"
+            valuesNumeric="true"
+            unit="units"
+            unitVisible="true"
+            lcdDecimals="1"
+            :value="odometerValue"
+          />
+        </td>
+        <td align="center">
+          <DisplayMulti
+            width="200"
+            height="80"
+            header="Header"
+            headerVisible="true"
             valuesNumeric="true"
             lcdDecimals="1"
+            unit="units"
+            unitVisible="true"
             :value="odometerValue"
           />
         </td>
@@ -732,6 +749,7 @@ import {
   Clock,
   Compass,
   DisplaySingle,
+  DisplayMulti,
   Horizon,
   Led,
   Level,
@@ -755,6 +773,7 @@ export default Vue.extend({
     Clock,
     Compass,
     DisplaySingle,
+    DisplayMulti,
     Horizon,
     Led,
     Level,
