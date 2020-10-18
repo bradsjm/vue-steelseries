@@ -1,6 +1,6 @@
 {
   "name": "vue-steelseries",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "Vue wrapper for the steelseries of gauge components for JavaScript",
   "main": "dist/vue-steelseries.ssr.js",
   "browser": "dist/vue-steelseries.esm.js",
@@ -20,7 +20,8 @@
   "keywords": [
     "vuejs",
     "steelseries",
-    "gauges"
+    "gauges",
+    "weather"
   ],
   "author": "Jonathan Bradshaw <jb@nrgup.net>",
   "license": "MIT",
