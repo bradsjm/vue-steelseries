@@ -14,13 +14,44 @@ npm install vue-steelseries --save
 
 ## Example
 
-```html
-<!DOCTYPE html>
-<html></html>
+```javascript
+import {
+  Altimeter,
+  Battery,
+  Clock,
+  Compass,
+  Horizon,
+  Led,
+  ...
+  WindDirection
+} from "vue-steelseries";
+
+export default {
+  name: "Demo",
+  components: {
+    Altimeter,
+    Battery,
+    Clock,
+    ...
+    WindDirection
+  }
+}
 ```
 
-```javascript
-import { Compass } from "vue-steelseries";
+```html
+<template>
+  <WindDirection
+    size="200"
+    frameDesign="GOLD"
+    lcdVisible="true"
+    :value="wind_dir + 1 || 0"
+    :average="avg_dir + 1 || 0"
+  />
+</template>
 ```
 
 ## Documentation
+
+Unfortunately there is currently no formal documentation however each Vue component has a full list of properties that can be used.
+
+Some capabilities are still be implemented including sections and areas.
