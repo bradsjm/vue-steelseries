@@ -35,6 +35,27 @@ export default {
       validator: (value) => !Number.isNaN(value),
     },
     /**
+     * Sets the color of the average value pointer in the dial
+     * @values RED, GREEN, BLUE, ORANGE, YELLOW, CYAN, MAGENTA, WHITE, GRAY, BLACK,
+     * RAITH, GREEN_LCD, JUG_GREEN
+     */
+    averagePointerColor: {
+      default: "BLUE",
+      required: false,
+      type: String,
+      validator: (value) => value.toUpperCase() in ColorDef,
+    },
+    /**
+     * Sets the design type of the average value pointer in the dial
+     * @values TYPE1 through TYPE16
+     */
+    averagePointerType: {
+      default: "TYPE8",
+      required: false,
+      type: String,
+      validator: (value) => value in PointerType,
+    },
+    /**
      * Background Color of Dial
      * @values DARK_GRAY, SATIN_GRAY, LIGHT_GRAY, WHITE, BLACK, BEIGE, BROWN, RED, GREEN, BLUE,
      * TURNED, ANTHRACITE, MUD, PUNCHED_SHEET, CARBON, STAINLESS, BRUSHED_METAL, BRUSHED_STAINLESS
@@ -55,9 +76,7 @@ export default {
     },
     /**
      * Set layer passed to the canvas drawImage. The specification permits
-     * any canvas image source (CanvasImageSource), specifically, a CSSImageValue,
-     * an HTMLImageElement, an SVGImageElement, an HTMLVideoElement, an HTMLCanvasElement,
-     * an ImageBitmap, or an OffscreenCanvas.
+     * any canvas image source (CanvasImageSource)
      */
     customLayer: {
       default: undefined,
@@ -205,27 +224,6 @@ export default {
       validator: (value) => value.toUpperCase() in ColorDef,
     },
     /**
-     * Sets the color of the average value pointer in the dial
-     * @values RED, GREEN, BLUE, ORANGE, YELLOW, CYAN, MAGENTA, WHITE, GRAY, BLACK,
-     * RAITH, GREEN_LCD, JUG_GREEN
-     */
-    averagePointerColor: {
-      default: "BLUE",
-      required: false,
-      type: String,
-      validator: (value) => value.toUpperCase() in ColorDef,
-    },
-    /**
-     * Sets the design type of the average value pointer in the dial
-     * @values TYPE1 through TYPE16
-     */
-    averagePointerType: {
-      default: "TYPE8",
-      required: false,
-      type: String,
-      validator: (value) => value in PointerType,
-    },
-    /**
      * Sets the design type of the latest value pointer in the dial
      * @values TYPE1 through TYPE16
      */
@@ -288,7 +286,7 @@ export default {
       type: [Boolean, String],
     },
     /**
-     * Latest Wind Direction Indicator
+     * Latest Wind Direction Indicator (Required)
      * @values 1-360 are used for directions, 0 is used as a special case to indicate 'calm'
      */
     value: {

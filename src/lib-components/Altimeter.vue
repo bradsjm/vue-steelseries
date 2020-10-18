@@ -43,9 +43,7 @@ export default {
     },
     /**
      * Set layer passed to the canvas drawImage. The specification permits
-     * any canvas image source (CanvasImageSource), specifically, a CSSImageValue,
-     * an HTMLImageElement, an SVGImageElement, an HTMLVideoElement, an HTMLCanvasElement,
-     * an ImageBitmap, or an OffscreenCanvas.
+     * any canvas image source (CanvasImageSource)
      */
     customLayer: {
       default: undefined,
@@ -171,7 +169,7 @@ export default {
       type: [Boolean, String],
     },
     /**
-     * Altitude value
+     * Altitude value (Required)
      */
     value: {
       required: true,

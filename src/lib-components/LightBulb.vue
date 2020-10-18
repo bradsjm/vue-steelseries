@@ -7,37 +7,62 @@ import { LightBulb } from "steelseries";
 
 import { toBoolean, toNumber } from "./util";
 
+/**
+ * Simple LightBulb display with adjustable color and on/off state
+ * @displayName LightBulb
+ */
 export default {
   name: "LightBulb",
   props: {
+    /**
+     * Set the canvas globalAlpha (transparency) of the image
+     * @values 0.0 to 1.0
+     */
     alpha: {
-      default: undefined,
+      default: 1,
       required: false,
       type: [Number, String],
+      validator: (value) => value >= 0 && value <= 1,
     },
+    /**
+     * Set the HTML "glow" color eminating from the bulb
+     */
     glowColor: {
-      default: undefined,
+      default: "#ffff00",
       required: false,
       type: String,
     },
+    /**
+     * Set the size in pixels of the canvas (height and width)
+     * Only used if height and width are not set
+     */
     size: {
       default: undefined,
       required: false,
       type: [Number, String],
       validator: (value) => toNumber(value) > 0,
     },
+    /**
+     * Set the height in pixels of the canvas
+     */
     height: {
       default: undefined,
       required: false,
       type: [Number, String],
       validator: (value) => toNumber(value) > 0,
     },
+    /**
+     * Set the width in pixels of the canvas
+     */
     width: {
       default: undefined,
       required: false,
       type: [Number, String],
       validator: (value) => toNumber(value) > 0,
     },
+    /**
+     * Bulb state, true for 'on' and false for 'off'
+     */
     value: {
       required: true,
       type: [Boolean, String],

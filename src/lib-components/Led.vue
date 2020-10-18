@@ -7,26 +7,42 @@ import { Led, LedColor } from "steelseries";
 
 import { toBoolean, toNumber } from "./util";
 
+/**
+ * Simple LED with on, off and blinking capabilities
+ * @displayName LED
+ */
 export default {
   name: "Led",
   props: {
+    /**
+     * Enables blinking
+     */
     blink: {
       default: undefined,
       required: false,
       type: [String, Boolean],
     },
+    /**
+     * Set the LED color
+     */
     ledColor: {
-      default: undefined,
+      default: "RED",
       required: false,
       type: String,
-      validator: (value) => value in LedColor,
+      validator: (value) => value.toUpperCase() in LedColor,
     },
+    /**
+     * Set the size in pixels of the canvas (height and width)
+     */
     size: {
       default: undefined,
       required: false,
       type: [Number, String],
       validator: (value) => toNumber(value) > 0,
     },
+    /**
+     * Set the LED on (true) or off (false)
+     */
     value: {
       required: true,
       type: [String, Boolean],
@@ -41,7 +57,7 @@ export default {
     draw: function() {
       this.gauge = new Led(this.$refs["view"], {
         size: toNumber(this.size),
-        ledColor: LedColor[this.ledColor],
+        ledColor: LedColor[toUpper(this.ledColor)],
       });
       this.gauge.setLedOnOff(toBoolean(this.value));
       this.gauge.blink(toBoolean(this.blink));

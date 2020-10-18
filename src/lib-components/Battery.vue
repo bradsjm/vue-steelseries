@@ -24,7 +24,7 @@ export default {
       validator: (value) => toNumber(value) > 0,
     },
     /**
-     * Battery Level percentindicator
+     * Battery Level percent indicator (Required)
      * @values 0-100
      */
     value: {
