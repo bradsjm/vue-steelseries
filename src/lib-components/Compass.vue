@@ -14,113 +14,186 @@ import {
   ForegroundType,
 } from "steelseries";
 
-import { toBoolean, toNumber } from "./util";
+import { toBoolean, toNumber, toUpper } from "./util";
 
+/**
+ * Displays directional compass dial.
+ * @displayName Compass
+ */
 export default {
   name: "Compass",
   props: {
-    // DARK_GRAY, SATIN_GRAY, LIGHT_GRAY, WHITE, BLACK, BEIGE, BROWN, RED, GREEN, BLUE, TURNED,
-    // ANTHRACITE, MUD, PUNCHED_SHEET, CARBON, STAINLESS, BRUSHED_METAL, BRUSHED_STAINLESS
+    /**
+     * Background Color of Dial
+     * @values DARK_GRAY, SATIN_GRAY, LIGHT_GRAY, WHITE, BLACK, BEIGE, BROWN, RED, GREEN, BLUE,
+     * TURNED, ANTHRACITE, MUD, PUNCHED_SHEET, CARBON, STAINLESS, BRUSHED_METAL, BRUSHED_STAINLESS
+     */
     backgroundColor: {
       default: undefined,
       required: false,
       type: String,
-      validator: (value) => value in BackgroundColor,
+      validator: (value) => value.toUpperCase() in BackgroundColor,
     },
+    /**
+     * Display the dial background
+     * @values Boolean (defaults to true)
+     */
     backgroundVisible: {
       default: undefined,
       required: false,
       type: [Boolean, String],
     },
+    /**
+     * Set layer passed to the canvas drawImage. The specification permits
+     * any canvas image source (CanvasImageSource), specifically, a CSSImageValue,
+     * an HTMLImageElement, an SVGImageElement, an HTMLVideoElement, an HTMLCanvasElement,
+     * an ImageBitmap, or an OffscreenCanvas.
+     */
     customLayer: {
       default: undefined,
       required: false,
     },
+    /**
+     * Display degrees around the dial edge from 0 to 360 in 20 degree increments
+     * @values Boolean (defaults to true)
+     */
     degreeScale: {
       default: undefined,
       required: false,
       type: [Boolean, String],
     },
-    // TYPE1 to TYPE5
+    /**
+     * Sets the foreground styling type
+     * @values TYPE1 through TYPE5
+     */
     foregroundType: {
       default: undefined,
       required: false,
       type: String,
-      validator: (value) => value in ForegroundType,
+      validator: (value) => value.toUpperCase() in ForegroundType,
     },
+    /**
+     * Display the foreground style (from foregroundType) on the dial
+     * @values Boolean (defaults to true)
+     */
     foregroundVisible: {
       default: undefined,
       required: false,
       type: [Boolean, String],
     },
-    // BLACK_METAL, METAL, SHINY_METAL, BRASS, STEEL, CHROME, GOLD, ANTHRACITE, TILTED_GRAY,
-    // TILTED_BLACK, GLOSSY_METAL
+    /**
+     * Select the frame design style used on the dial
+     * @values BLACK_METAL, METAL, SHINY_METAL, BRASS, STEEL, CHROME, GOLD, ANTHRACITE,
+     *         TILTED_GRAY, TILTED_BLACK, GLOSSY_METAL
+     */
     frameDesign: {
       default: undefined,
       required: false,
       type: String,
-      validator: (value) => value in FrameDesign,
+      validator: (value) => value.toUpperCase() in FrameDesign,
     },
+    /**
+     * Display the frame (with the frameDesign selected) around the dial
+     * @values Boolean (defaults to true)
+     */
     frameVisible: {
       default: undefined,
       required: false,
       type: [Boolean, String],
     },
-    // BLACK, BRASS, SILVER
+    /**
+     * Sets the knob (where the hands connect in the center) design style
+     * @values BLACK, BRASS, SILVER
+     */
     knobStyle: {
       default: undefined,
       required: false,
       type: String,
-      validator: (value) => value in KnobStyle,
+      validator: (value) => value.toUpperCase() in KnobStyle,
     },
-    // STANDARD_KNOB, METAL_KNOB
+    /**
+     * Sets the knob (where the hands connect in the center) type
+     * @values STANDARD_KNOB, METAL_KNOB
+     */
     knobType: {
       default: undefined,
       required: false,
       type: String,
-      validator: (value) => value in KnobType,
+      validator: (value) => value.toUpperCase() in KnobType,
     },
+    /**
+     * Sets the color of the latest value pointer in the dial
+     * @values RED, GREEN, BLUE, ORANGE, YELLOW, CYAN, MAGENTA, WHITE, GRAY, BLACK,
+     * RAITH, GREEN_LCD, JUG_GREEN
+     */
     pointerColor: {
       default: undefined,
       required: false,
       type: String,
-      validator: (value) => value in ColorDef,
+      validator: (value) => value.toUpperCase() in ColorDef,
     },
-    // TYPE1 through TYPE16
+    /**
+     * Sets the design type of the latest value pointer in the dial
+     * @values TYPE1 through TYPE16
+     */
     pointerType: {
       default: undefined,
       required: false,
       type: String,
       validator: (value) => value in PointerType,
     },
+    /**
+     * Sets the symbols of the 8 compass points around the dial
+     * @values Comma seperated string of 8 symbols (default is "N,NE,E,SE,S,SW,W,NW")
+     */
     pointSymbols: {
-      default: undefined,
+      default: "N,NE,E,SE,S,SW,W,NW",
       required: false,
-      type: Array,
+      type: String,
+      validator: (value) => value.split(",").length == 8,
     },
+    /**
+     * Display symbols of the 8 compass points around the dial
+     * @values Boolean (defaults to true)
+     */
     pointSymbolsVisible: {
       default: undefined,
       required: false,
       type: [Boolean, String],
     },
+    /**
+     * Display compass rose overlay showing the orientation of
+     * the cardinal directions and the intermediate points
+     * @values Boolean (defaults to true)
+     */
     roseVisible: {
       default: undefined,
       required: false,
       type: [Boolean, String],
     },
+    /**
+     * Rotate the compass face so that north is always up
+     * @values Boolean (defaults to false)
+     */
     rotateFace: {
       default: undefined,
       required: false,
       type: [Boolean, String],
     },
+    /**
+     * Set the size of the canvas (height and width)
+     * @values Pixels
+     */
     size: {
       default: undefined,
       required: false,
       type: [Number, String],
       validator: (value) => toNumber(value) > 0,
     },
-    // 1-360 are used for directions
-    // 0 is used as a special case to indicate 'calm'
+    /**
+     * Direction Indicator
+     * @values 0-359 are used for indicator
+     */
     value: {
       required: true,
       type: [Number, String],
@@ -135,19 +208,19 @@ export default {
   methods: {
     draw: function() {
       this.gauge = new Compass(this.$refs["view"], {
-        backgroundColor: BackgroundColor[this.backgroundColor],
+        backgroundColor: BackgroundColor[toUpper(this.backgroundColor)],
         backgroundVisible: toBoolean(this.backgroundVisible),
         customLayer: this.customLayer,
         degreeScale: toBoolean(this.degreeScale),
-        foregroundType: ForegroundType[this.foregroundType],
+        foregroundType: ForegroundType[toUpper(this.foregroundType)],
         foregroundVisible: toBoolean(this.foregroundVisible),
-        frameDesign: FrameDesign[this.frameDesign],
+        frameDesign: FrameDesign[toUpper(this.frameDesign)],
         frameVisible: toBoolean(this.frameVisible),
-        knobStyle: KnobStyle[this.knobStyle],
-        knobType: KnobType[this.knobType],
-        pointerColor: ColorDef[this.pointerColor],
-        pointerType: PointerType[this.pointerTypeLatest],
-        pointSymbols: this.pointSymbols,
+        knobStyle: KnobStyle[toUpper(this.knobStyle)],
+        knobType: KnobType[toUpper(this.knobType)],
+        pointerColor: ColorDef[toUpper(this.pointerColor)],
+        pointerType: PointerType[toUpper(this.pointerTypeLatest)],
+        pointSymbols: this.pointSymbols.split(","),
         pointSymbolsVisible: toBoolean(this.pointSymbolsVisible),
         roseVisible: toBoolean(this.roseVisible),
         rotateFace: toBoolean(this.rotateFace),
@@ -161,22 +234,24 @@ export default {
   },
   watch: {
     backgroundColor(newValue) {
-      this.gauge && this.gauge.setBackgroundColor(BackgroundColor[newValue]);
+      this.gauge &&
+        this.gauge.setBackgroundColor(toUpper(BackgroundColor[newValue]));
     },
     foregroundType(newValue) {
-      this.gauge && this.gauge.setForegroundType(ForegroundType[newValue]);
+      this.gauge &&
+        this.gauge.setForegroundType(ForegroundType[toUpper(newValue)]);
     },
     frameDesign(newValue) {
-      this.gauge && this.gauge.setFrameDesign(FrameDesign[newValue]);
+      this.gauge && this.gauge.setFrameDesign(FrameDesign[toUpper(newValue)]);
     },
     pointSymbols(newValue) {
-      this.gauge && this.gauge.setPointSymbols(newValue);
+      this.gauge && this.gauge.setPointSymbols(newValue.split(","));
     },
     pointerColor(newValue) {
-      this.gauge && this.gauge.setPointerColor(ColorDef[newValue]);
+      this.gauge && this.gauge.setPointerColor(ColorDef[toUpper(newValue)]);
     },
     pointerType(newValue) {
-      this.gauge && this.gauge.setPointerType(PointerType[newValue]);
+      this.gauge && this.gauge.setPointerType(PointerType[toUpper(newValue)]);
     },
     size() {
       this.draw();

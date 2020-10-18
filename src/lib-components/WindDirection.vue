@@ -55,7 +55,10 @@ export default {
       type: [Boolean, String],
     },
     /**
-     * Set the custom layer
+     * Set layer passed to the canvas drawImage. The specification permits
+     * any canvas image source (CanvasImageSource), specifically, a CSSImageValue,
+     * an HTMLImageElement, an SVGImageElement, an HTMLVideoElement, an HTMLCanvasElement,
+     * an ImageBitmap, or an OffscreenCanvas.
      */
     customLayer: {
       default: undefined,
@@ -381,7 +384,7 @@ export default {
         this.gauge.setPointerColorAverage(ColorDef[toUpper(newValue)]);
     },
     pointSymbols(newValue) {
-      this.gauge && this.gauge.setPointSymbols(newValue);
+      this.gauge && this.gauge.setPointSymbols(newValue.split(","));
     },
     pointerType(newValue) {
       this.gauge && this.gauge.setPointerType(PointerType[toUpper(newValue)]);
