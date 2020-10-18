@@ -26,4 +26,11 @@ function toNumber(value) {
     : Number(value);
 }
 
-export { toNumber, toBoolean };
+function toUpper(value) {
+  if (undefined === value) return value;
+  return "string" === typeof value
+    ? value.toUpperCase()
+    : value.toString().toUpperCase();
+}
+
+export { toNumber, toBoolean, toUpper };

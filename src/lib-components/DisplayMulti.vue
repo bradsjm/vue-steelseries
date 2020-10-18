@@ -136,7 +136,6 @@ export default {
         valuesNumeric: toBoolean(this.valuesNumeric),
         width: this.width ? toNumber(this.width) : toNumber(this.size),
       });
-      this.gauge.setScrolling(toBoolean(this.scrolling));
     },
   },
   mounted() {
@@ -151,9 +150,6 @@ export default {
     },
     lcdColor(newValue) {
       this.gauge && this.gauge.setLcdColor(LcdColor[newValue]);
-    },
-    scrolling(newValue) {
-      this.gauge && this.gauge.setScrolling(toBoolean(newValue));
     },
     section(newValue) {
       this.gauge && this.gauge.setSection(newValue);
