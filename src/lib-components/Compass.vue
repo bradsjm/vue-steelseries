@@ -29,17 +29,16 @@ export default {
      * TURNED, ANTHRACITE, MUD, PUNCHED_SHEET, CARBON, STAINLESS, BRUSHED_METAL, BRUSHED_STAINLESS
      */
     backgroundColor: {
-      default: undefined,
+      default: "DARK_GRAY",
       required: false,
       type: String,
       validator: (value) => value.toUpperCase() in BackgroundColor,
     },
     /**
      * Display the dial background
-     * @values Boolean (defaults to true)
      */
     backgroundVisible: {
-      default: undefined,
+      default: true,
       required: false,
       type: [Boolean, String],
     },
@@ -55,10 +54,9 @@ export default {
     },
     /**
      * Display degrees around the dial edge from 0 to 360 in 20 degree increments
-     * @values Boolean (defaults to true)
      */
     degreeScale: {
-      default: undefined,
+      default: true,
       required: false,
       type: [Boolean, String],
     },
@@ -67,17 +65,16 @@ export default {
      * @values TYPE1 through TYPE5
      */
     foregroundType: {
-      default: undefined,
+      default: "TYPE1",
       required: false,
       type: String,
       validator: (value) => value.toUpperCase() in ForegroundType,
     },
     /**
      * Display the foreground style (from foregroundType) on the dial
-     * @values Boolean (defaults to true)
      */
     foregroundVisible: {
-      default: undefined,
+      default: true,
       required: false,
       type: [Boolean, String],
     },
@@ -87,17 +84,16 @@ export default {
      *         TILTED_GRAY, TILTED_BLACK, GLOSSY_METAL
      */
     frameDesign: {
-      default: undefined,
+      default: "METAL",
       required: false,
       type: String,
       validator: (value) => value.toUpperCase() in FrameDesign,
     },
     /**
      * Display the frame (with the frameDesign selected) around the dial
-     * @values Boolean (defaults to true)
      */
     frameVisible: {
-      default: undefined,
+      default: true,
       required: false,
       type: [Boolean, String],
     },
@@ -106,7 +102,7 @@ export default {
      * @values BLACK, BRASS, SILVER
      */
     knobStyle: {
-      default: undefined,
+      default: "SILVER",
       required: false,
       type: String,
       validator: (value) => value.toUpperCase() in KnobStyle,
@@ -116,7 +112,7 @@ export default {
      * @values STANDARD_KNOB, METAL_KNOB
      */
     knobType: {
-      default: undefined,
+      default: "STANDARD_KNOB",
       required: false,
       type: String,
       validator: (value) => value.toUpperCase() in KnobType,
@@ -127,7 +123,7 @@ export default {
      * RAITH, GREEN_LCD, JUG_GREEN
      */
     pointerColor: {
-      default: undefined,
+      default: "RED",
       required: false,
       type: String,
       validator: (value) => value.toUpperCase() in ColorDef,
@@ -137,7 +133,7 @@ export default {
      * @values TYPE1 through TYPE16
      */
     pointerType: {
-      default: undefined,
+      default: "TYPE1",
       required: false,
       type: String,
       validator: (value) => value in PointerType,
@@ -154,35 +150,31 @@ export default {
     },
     /**
      * Display symbols of the 8 compass points around the dial
-     * @values Boolean (defaults to true)
      */
     pointSymbolsVisible: {
-      default: undefined,
+      default: true,
       required: false,
       type: [Boolean, String],
     },
     /**
      * Display compass rose overlay showing the orientation of
      * the cardinal directions and the intermediate points
-     * @values Boolean (defaults to true)
      */
     roseVisible: {
-      default: undefined,
+      default: true,
       required: false,
       type: [Boolean, String],
     },
     /**
      * Rotate the compass face so that north is always up
-     * @values Boolean (defaults to false)
      */
     rotateFace: {
-      default: undefined,
+      default: false,
       required: false,
       type: [Boolean, String],
     },
     /**
-     * Set the size of the canvas (height and width)
-     * @values Pixels
+     * Set the pixel size of the canvas (height and width)
      */
     size: {
       default: undefined,
