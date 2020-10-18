@@ -28,6 +28,9 @@ import { toBoolean, toNumber, toUpper } from "./util";
 export default {
   name: "Radial",
   props: {
+    /**
+     * HTML audio url used to embed optional alarm sound
+     */
     alarmSound: {
       default: undefined,
       required: false,

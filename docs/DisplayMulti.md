@@ -1,27 +1,28 @@
-# DisplayMulti
+# Display Multi
+
+> LCD Multi Line Display
 
 ## Props
 
-| Prop name     | Description | Type            | Values | Default   |
-| ------------- | ----------- | --------------- | ------ | --------- |
-| altValue      |             | number\|string  | -      |           |
-| alwaysScroll  |             | boolean\|string | -      | undefined |
-| autoScroll    |             | boolean\|string | -      | undefined |
-| detail        |             | string          | -      | undefined |
-| detailVisible |             | boolean\|string | -      | undefined |
-| digitalFont   |             | string          | -      | undefined |
-| header        |             | string          | -      | undefined |
-| headerVisible |             | boolean\|string | -      | undefined |
-| height        |             | number\|string  | -      | undefined |
-| lcdColor      |             | string          | -      | undefined |
-| lcdDecimals   |             | number\|string  | -      | undefined |
-| linkAltValue  |             | boolean\|string | -      | undefined |
-| section       |             | object          | -      | undefined |
-| size          |             | number\|string  | -      | undefined |
-| unit          |             | string          | -      | undefined |
-| unitVisible   |             | boolean\|string | -      | undefined |
-| value         |             | number\|string  | -      |           |
-| valuesNumeric |             | boolean\|string | -      | undefined |
-| width         |             | number\|string  | -      | undefined |
+| Prop name     | Description                                             | Type            | Values                                                                                                                                                                                                                                                                      | Default    |
+| ------------- | ------------------------------------------------------- | --------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------- |
+| altValue      | Alt Value                                               | number\|string  | -                                                                                                                                                                                                                                                                           | 0          |
+| alwaysScroll  | Always scroll display regardless of length              | boolean\|string | -                                                                                                                                                                                                                                                                           | false      |
+| autoScroll    | Auto scroll display if length is wider than display     | boolean\|string | -                                                                                                                                                                                                                                                                           | false      |
+| detail        | Detail text                                             | string          | -                                                                                                                                                                                                                                                                           | undefined  |
+| detailVisible | Enable detail display                                   | boolean\|string | -                                                                                                                                                                                                                                                                           | false      |
+| digitalFont   | Use digital font for display                            | boolean\|string | -                                                                                                                                                                                                                                                                           | false      |
+| header        | Header text                                             | string          | -                                                                                                                                                                                                                                                                           | undefined  |
+| headerVisible | Show header text                                        | boolean\|string | -                                                                                                                                                                                                                                                                           | undefined  |
+| height        | Set height of canvas in pixels                          | number\|string  | -                                                                                                                                                                                                                                                                           | undefined  |
+| lcdColor      | Sets the color of the LCD background                    | string          | `BEIGE`, `BLUE`, `ORANGE`, `RED`, `YELLOW`, `WHITE`, `GRAY`, `BLACK`, `GREEN`, `BLUE2`, `BLUE_BLACK`, `BLUE_DARKBLUE`, `BLUE_GRAY`, `STANDARD`, `STANDARD_GREEN`, `BLUE_BLUE`, `RED_DARKRED`, `DARKBLUE`, `LILA`, `BLACKRED`, `DARKGREEN`, `AMBER`, `LIGHTBLUE`, `SECTIONS` | "STANDARD" |
+| lcdDecimals   | Set the number of decimal places displayed on the LCD   | number\|string  | -                                                                                                                                                                                                                                                                           | 2          |
+| linkAltValue  | Link alt value to value                                 | boolean\|string | -                                                                                                                                                                                                                                                                           | true       |
+| size          | Set the size in pixels of the canvas (height and width) | number\|string  | -                                                                                                                                                                                                                                                                           | undefined  |
+| unit          | Sets the unit values                                    | string          | -                                                                                                                                                                                                                                                                           | undefined  |
+| unitVisible   | Show the unit text                                      | boolean\|string | -                                                                                                                                                                                                                                                                           | undefined  |
+| value         | Value to display on LCD                                 | number\|string  | -                                                                                                                                                                                                                                                                           |            |
+| valuesNumeric | Set to 'true' if the value is numeric                   | boolean\|string | -                                                                                                                                                                                                                                                                           | undefined  |
+| width         | Set width of canvas in pixels                           | number\|string  | -                                                                                                                                                                                                                                                                           | undefined  |
 
 ---

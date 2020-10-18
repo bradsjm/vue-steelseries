@@ -7,39 +7,61 @@ import { TrafficLight } from "steelseries";
 
 import { toBoolean, toNumber } from "./util";
 
+/**
+ * Traffic Light display allowing individual control of red, yellow and green LEDs
+ * @displayName Traffic Light
+ */
 export default {
   name: "TrafficLight",
   props: {
+    /**
+     * Height of canvas in pixels
+     */
     height: {
       default: undefined,
       required: false,
       type: [Number, String],
       validator: (value) => toNumber(value) > 0,
     },
+    /**
+     * Width of canvas in pixels
+     */
     width: {
       default: undefined,
       required: false,
       type: [Number, String],
       validator: (value) => toNumber(value) > 0,
     },
+    /**
+     * Size of canvas in pixels (if height and width are not set)
+     */
     size: {
       default: undefined,
       required: false,
       type: [Number, String],
       validator: (value) => toNumber(value) > 0,
     },
+    /**
+     * Red LED enable
+     */
     red: {
-      default: undefined,
+      default: false,
       required: false,
       type: [Boolean, String],
     },
+    /**
+     * Yellow LED enable
+     */
     yellow: {
-      default: undefined,
+      default: false,
       required: false,
       type: [Boolean, String],
     },
+    /**
+     * Green LED enable
+     */
     green: {
-      default: undefined,
+      default: false,
       required: false,
       type: [Boolean, String],
     },

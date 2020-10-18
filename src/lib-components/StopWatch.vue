@@ -11,69 +11,105 @@ import {
   ForegroundType,
 } from "steelseries";
 
-import { toBoolean, toNumber } from "./util";
+import { toBoolean, toNumber, toUpper } from "./util";
 
 export default {
   name: "StopWatch",
   props: {
-    // DARK_GRAY, SATIN_GRAY, LIGHT_GRAY, WHITE, BLACK, BEIGE, BROWN, RED, GREEN, BLUE, TURNED,
-    // ANTHRACITE, MUD, PUNCHED_SHEET, CARBON, STAINLESS, BRUSHED_METAL, BRUSHED_STAINLESS
+    /**
+     * Background Color of Dial
+     * @values DARK_GRAY, SATIN_GRAY, LIGHT_GRAY, WHITE, BLACK, BEIGE, BROWN, RED, GREEN, BLUE,
+     * TURNED, ANTHRACITE, MUD, PUNCHED_SHEET, CARBON, STAINLESS, BRUSHED_METAL, BRUSHED_STAINLESS
+     */
     backgroundColor: {
-      default: undefined,
+      default: "DARK_GRAY",
       required: false,
       type: String,
-      validator: (value) => value in BackgroundColor,
+      validator: (value) => value.toUpperCase() in BackgroundColor,
     },
+    /**
+     * Display the dial background
+     */
     backgroundVisible: {
-      default: undefined,
+      default: true,
       required: false,
       type: [Boolean, String],
     },
+    /**
+     * Set layer passed to the canvas drawImage. The specification permits
+     * any canvas image source (CanvasImageSource)
+     */
     customLayer: {
       default: undefined,
       required: false,
-    },
-    // TYPE1 to TYPE5
+    }, // TYPE1 to TYPE5
+    /**
+     * Sets the foreground styling type
+     * @values TYPE1 through TYPE5
+     */
     foregroundType: {
-      default: undefined,
+      default: "TYPE1",
       required: false,
       type: String,
-      validator: (value) => value in ForegroundType,
+      validator: (value) => value.toUpperCase() in ForegroundType,
     },
+    /**
+     * Display the foreground style (from foregroundType) on the dial
+     */
     foregroundVisible: {
-      default: undefined,
+      default: true,
       required: false,
       type: [Boolean, String],
     },
-    // BLACK_METAL, METAL, SHINY_METAL, BRASS, STEEL, CHROME, GOLD, ANTHRACITE, TILTED_GRAY,
-    // TILTED_BLACK, GLOSSY_METAL
+    /**
+     * Select the frame design style used on the dial
+     * @values BLACK_METAL, METAL, SHINY_METAL, BRASS, STEEL, CHROME, GOLD, ANTHRACITE,
+     *         TILTED_GRAY, TILTED_BLACK, GLOSSY_METAL
+     */
     frameDesign: {
-      default: undefined,
+      default: "METAL",
       required: false,
       type: String,
-      validator: (value) => value in FrameDesign,
+      validator: (value) => value.toUpperCase() in FrameDesign,
     },
+    /**
+     * Display the frame (with the frameDesign selected) around the dial
+     */
     frameVisible: {
-      default: undefined,
+      default: true,
       required: false,
       type: [Boolean, String],
     },
+    /**
+     * Sets the color of the latest value pointer in the dial
+     * @values RED, GREEN, BLUE, ORANGE, YELLOW, CYAN, MAGENTA, WHITE, GRAY, BLACK,
+     * RAITH, GREEN_LCD, JUG_GREEN
+     */
     pointerColor: {
-      default: undefined,
+      default: "RED",
       required: false,
       type: String,
-      validator: (value) => value in ColorDef,
+      validator: (value) => value.toUpperCase() in ColorDef,
     },
+    /**
+     * Set to true to reset the stop watch to zero
+     */
     reset: {
-      default: undefined,
+      default: false,
       required: false,
       type: [Boolean, String],
     },
+    /**
+     * Set to true to start stop watch, false to stop
+     */
     run: {
       default: undefined,
       required: false,
       type: [Boolean, String],
     },
+    /**
+     * Set the size in pixels of the canvas (height and width)
+     */
     size: {
       default: undefined,
       required: false,
@@ -89,14 +125,14 @@ export default {
   methods: {
     draw: function() {
       this.gauge = new StopWatch(this.$refs["view"], {
-        backgroundColor: BackgroundColor[this.backgroundColor],
+        backgroundColor: BackgroundColor[toUpper(this.backgroundColor)],
         backgroundVisible: toBoolean(this.backgroundVisible),
         customLayer: this.customLayer,
-        foregroundType: ForegroundType[this.foregroundType],
+        foregroundType: ForegroundType[toUpper(this.foregroundType)],
         foregroundVisible: toBoolean(this.foregroundVisible),
-        frameDesign: FrameDesign[this.frameDesign],
+        frameDesign: FrameDesign[toUpper(this.frameDesign)],
         frameVisible: toBoolean(this.frameVisible),
-        pointerColor: ColorDef[this.pointerColor],
+        pointerColor: ColorDef[toUpper(this.pointerColor)],
         size: toNumber(this.size),
       });
       if (toBoolean(this.run)) this.startWatch();
@@ -127,16 +163,18 @@ export default {
   },
   watch: {
     backgroundColor(newValue) {
-      this.gauge && this.gauge.setBackgroundColor(BackgroundColor[newValue]);
+      this.gauge &&
+        this.gauge.setBackgroundColor(BackgroundColor[toUpper(newValue)]);
     },
     foregroundType(newValue) {
-      this.gauge && this.gauge.setForegroundType(ForegroundType[newValue]);
+      this.gauge &&
+        this.gauge.setForegroundType(ForegroundType[toUpper(newValue)]);
     },
     frameDesign(newValue) {
-      this.gauge && this.gauge.setFrameDesign(FrameDesign[newValue]);
+      this.gauge && this.gauge.setFrameDesign(FrameDesign[toUpper(newValue)]);
     },
     pointerColor(newValue) {
-      this.gauge && this.gauge.setPointerColor(ColorDef[newValue]);
+      this.gauge && this.gauge.setPointerColor(ColorDef[toUpper(newValue)]);
     },
     reset(newValue) {
       if (toBoolean(newValue)) this.resetWatch();
