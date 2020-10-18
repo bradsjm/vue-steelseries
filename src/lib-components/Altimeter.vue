@@ -13,103 +13,166 @@ import {
   ForegroundType,
 } from "steelseries";
 
-import { toBoolean, toNumber } from "./util";
+import { toBoolean, toNumber, toUpper } from "./util";
 
+/**
+ * Displays altimeter gauge.
+ * @displayName Altimeter
+ */
 export default {
   name: "Altimeter",
   props: {
-    // DARK_GRAY, SATIN_GRAY, LIGHT_GRAY, WHITE, BLACK, BEIGE, BROWN, RED, GREEN, BLUE, TURNED,
-    // ANTHRACITE, MUD, PUNCHED_SHEET, CARBON, STAINLESS, BRUSHED_METAL, BRUSHED_STAINLESS
+    /**
+     * Background Color of Dial
+     * @values DARK_GRAY, SATIN_GRAY, LIGHT_GRAY, WHITE, BLACK, BEIGE, BROWN, RED, GREEN, BLUE,
+     * TURNED, ANTHRACITE, MUD, PUNCHED_SHEET, CARBON, STAINLESS, BRUSHED_METAL, BRUSHED_STAINLESS
+     */
     backgroundColor: {
-      default: undefined,
+      default: "DARK_GRAY",
       required: false,
       type: String,
-      validator: (value) => value in BackgroundColor,
+      validator: (value) => value.toUpperCase() in BackgroundColor,
     },
+    /**
+     * Display the dial background
+     */
     backgroundVisible: {
-      default: undefined,
+      default: true,
       required: false,
       type: [Boolean, String],
     },
+    /**
+     * Set layer passed to the canvas drawImage. The specification permits
+     * any canvas image source (CanvasImageSource), specifically, a CSSImageValue,
+     * an HTMLImageElement, an SVGImageElement, an HTMLVideoElement, an HTMLCanvasElement,
+     * an ImageBitmap, or an OffscreenCanvas.
+     */
     customLayer: {
       default: undefined,
       required: false,
     },
+    /**
+     * Uses LCD font the LCD display
+     */
     digitalFont: {
-      default: undefined,
+      default: false,
       required: false,
-      type: String,
+      type: [Boolean, String],
     },
-    // TYPE1 to TYPE5
+    /**
+     * Sets the foreground styling type
+     * @values TYPE1 through TYPE5
+     */
     foregroundType: {
-      default: undefined,
+      default: "TYPE1",
       required: false,
       type: String,
-      validator: (value) => value in ForegroundType,
+      validator: (value) => value.toUpperCase() in ForegroundType,
     },
+    /**
+     * Display the foreground style (from foregroundType) on the dial
+     */
     foregroundVisible: {
-      default: undefined,
+      default: true,
       required: false,
       type: [Boolean, String],
     },
-    // BLACK_METAL, METAL, SHINY_METAL, BRASS, STEEL, CHROME, GOLD, ANTHRACITE, TILTED_GRAY,
-    // TILTED_BLACK, GLOSSY_METAL
+    /**
+     * Select the frame design style used on the dial
+     * @values BLACK_METAL, METAL, SHINY_METAL, BRASS, STEEL, CHROME, GOLD, ANTHRACITE,
+     *         TILTED_GRAY, TILTED_BLACK, GLOSSY_METAL
+     */
     frameDesign: {
-      default: undefined,
+      default: "METAL",
       required: false,
       type: String,
-      validator: (value) => value in FrameDesign,
+      validator: (value) => value.toUpperCase() in FrameDesign,
     },
+    /**
+     * Display the frame (with the frameDesign selected) around the dial
+     */
     frameVisible: {
-      default: undefined,
+      default: true,
       required: false,
       type: [Boolean, String],
     },
+    /**
+     * Sets the knob (where the hands connect in the center) design style
+     * @values BLACK, BRASS, SILVER
+     */
     knobStyle: {
-      default: undefined,
+      default: "SILVER",
       required: false,
       type: String,
-      validator: (value) => value in KnobStyle,
+      validator: (value) => value.toUpperCase() in KnobStyle,
     },
+    /**
+     * Sets the knob (where the hands connect in the center) type
+     * @values STANDARD_KNOB, METAL_KNOB
+     */
     knobType: {
-      default: undefined,
+      default: "STANDARD_KNOB",
       required: false,
       type: String,
-      validator: (value) => value in KnobType,
+      validator: (value) => value.toUpperCase() in KnobType,
     },
+    /**
+     * Sets the color of the LCD background
+     * @values BEIGE, BLUE, ORANGE, RED, YELLOW, WHITE, GRAY, BLACK, GREEN, BLUE2, BLUE_BLACK,
+     * BLUE_DARKBLUE, BLUE_GRAY, STANDARD, STANDARD_GREEN, BLUE_BLUE, RED_DARKRED, DARKBLUE,
+     * LILA, BLACKRED, DARKGREEN, AMBER, LIGHTBLUE, SECTIONS
+     */
     lcdColor: {
-      default: undefined,
+      default: "STANDARD",
       required: false,
       type: String,
-      validator: (value) => value in LcdColor,
+      validator: (value) => value.toUpperCase() in LcdColor,
     },
+    /**
+     * Display the LCD displays (latest and average) in the dial
+     * @values Boolean (defaults to true)
+     */
     lcdVisible: {
-      default: undefined,
+      default: true,
       required: false,
       type: [Boolean, String],
     },
+    /**
+     * Set the size in pixels of the canvas (height and width)
+     */
     size: {
       default: undefined,
       required: false,
       type: [Number, String],
       validator: (value) => toNumber(value) > 0,
     },
+    /**
+     * Set the gauge title shown in the center
+     */
     title: {
       default: undefined,
       required: false,
       type: String,
     },
+    /**
+     * Set the unit title
+     */
     unit: {
       default: undefined,
       required: false,
       type: String,
     },
+    /**
+     * Alternate unit position enabled
+     */
     unitAltPos: {
-      default: undefined,
+      default: false,
       required: false,
-      type: [Number, String],
-      validator: (value) => !Number.isNaN(value),
+      type: [Boolean, String],
     },
+    /**
+     * Altitude value
+     */
     value: {
       required: true,
       type: [Number, String],
@@ -124,21 +187,21 @@ export default {
   methods: {
     draw: function() {
       this.gauge = new Altimeter(this.$refs["view"], {
-        backgroundColor: BackgroundColor[this.backgroundColor],
+        backgroundColor: BackgroundColor[toUpper(this.backgroundColor)],
         backgroundVisible: toBoolean(this.backgroundVisible),
         customLayer: this.customLayer,
-        digitalFont: this.digitalFont,
-        foregroundType: ForegroundType[this.foregroundType],
+        digitalFont: toBoolean(this.digitalFont),
+        foregroundType: ForegroundType[toUpper(this.foregroundType)],
         foregroundVisible: toBoolean(this.foregroundVisible),
-        frameDesign: FrameDesign[this.frameDesign],
+        frameDesign: FrameDesign[toUpper(this.frameDesign)],
         frameVisible: toBoolean(this.frameVisible),
-        knobStyle: KnobStyle[this.knowStyle],
-        knobType: KnobType[this.knobType],
-        lcdColor: LcdColor[this.lcdColor],
+        knobStyle: KnobStyle[toUpper(this.knowStyle)],
+        knobType: KnobType[toUpper(this.knobType)],
+        lcdColor: LcdColor[toUpper(this.lcdColor)],
         lcdVisible: toBoolean(this.lcdVisible),
         size: toNumber(this.size),
         titleString: this.title,
-        unitAltPos: toNumber(this.unitAltPos),
+        unitAltPos: toBoolean(this.unitAltPos),
         unitString: this.unit,
       });
       this.value && this.gauge.setValue(toNumber(this.value));
@@ -149,16 +212,18 @@ export default {
   },
   watch: {
     backgroundColor(newValue) {
-      this.gauge && this.gauge.setBackgroundColor(BackgroundColor[newValue]);
+      this.gauge &&
+        this.gauge.setBackgroundColor(BackgroundColor[toUpper(newValue)]);
     },
     foregroundType(newValue) {
-      this.gauge && this.gauge.setForegroundType(ForegroundType[newValue]);
+      this.gauge &&
+        this.gauge.setForegroundType(ForegroundType[toUpper(newValue)]);
     },
     frameDesign(newValue) {
-      this.gauge && this.gauge.setFrameDesign(FrameDesign[newValue]);
+      this.gauge && this.gauge.setFrameDesign(FrameDesign[toUpper(newValue)]);
     },
     lcdColor(newValue) {
-      this.gauge && this.gauge.setLcdColor(LcdColor[newValue]);
+      this.gauge && this.gauge.setLcdColor(LcdColor[toUpper(newValue)]);
     },
     size() {
       this.draw();

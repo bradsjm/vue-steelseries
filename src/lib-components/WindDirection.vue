@@ -310,7 +310,7 @@ export default {
         customLayer: this.customLayer,
         degreeScale: toBoolean(this.degreeScale),
         degreeScaleHalf: toBoolean(this.degreeScaleHalf),
-        digitalFont: this.digitalFont,
+        digitalFont: toBoolean(this.digitalFont),
         foregroundType: ForegroundType[toUpper(this.foregroundType)],
         foregroundVisible: toBoolean(this.foregroundVisible),
         frameDesign: FrameDesign[toUpper(this.frameDesign)],

@@ -7,15 +7,26 @@ import { Battery } from "steelseries";
 
 import { toBoolean, toNumber } from "./util";
 
+/**
+ * Displays battery gauge.
+ * @displayName Altimeter
+ */
 export default {
   name: "Battery",
   props: {
+    /**
+     * Set the size in pixels of the canvas (height and width)
+     */
     size: {
       default: undefined,
       required: false,
       type: [Number, String],
       validator: (value) => toNumber(value) > 0,
     },
+    /**
+     * Battery Level percentindicator
+     * @values 0-100
+     */
     value: {
       required: true,
       type: [Number, String],
