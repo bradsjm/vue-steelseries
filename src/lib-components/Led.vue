@@ -5,7 +5,7 @@
 <script>
 import { Led, LedColor } from "steelseries";
 
-import { toBoolean, toNumber } from "./util";
+import { toBoolean, toNumber, toUpper } from "./util";
 
 /**
  * Simple LED with on, off and blinking capabilities
@@ -24,9 +24,10 @@ export default {
     },
     /**
      * Set the LED color
+     * @values RED_LED, GREEN_LED, BLUE_LED, ORANGE_LED, YELLOW_LED, CYAN_LED, MAGENTA_LED
      */
     ledColor: {
-      default: "RED",
+      default: "RED_LED",
       required: false,
       type: String,
       validator: (value) => value.toUpperCase() in LedColor,

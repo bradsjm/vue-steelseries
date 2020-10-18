@@ -19,8 +19,12 @@ import {
   TickLabelOrientation,
 } from "steelseries";
 
-import { toBoolean, toNumber } from "./util";
+import { toBoolean, toNumber, toUpper } from "./util";
 
+/**
+ * Radial gauges
+ * @displayName Radial
+ */
 export default {
   name: "Radial",
   props: {
@@ -29,208 +33,380 @@ export default {
       required: false,
       type: [Boolean, String],
     },
-    // DARK_GRAY, SATIN_GRAY, LIGHT_GRAY, WHITE, BLACK, BEIGE, BROWN, RED, GREEN, BLUE, TURNED,
-    // ANTHRACITE, MUD, PUNCHED_SHEET, CARBON, STAINLESS, BRUSHED_METAL, BRUSHED_STAINLESS
+    /**
+     * Background Color of Dial
+     * @values DARK_GRAY, SATIN_GRAY, LIGHT_GRAY, WHITE, BLACK, BEIGE, BROWN, RED, GREEN, BLUE,
+     * TURNED, ANTHRACITE, MUD, PUNCHED_SHEET, CARBON, STAINLESS, BRUSHED_METAL, BRUSHED_STAINLESS
+     */
     backgroundColor: {
-      default: undefined,
+      default: "DARK_GRAY",
       required: false,
       type: String,
-      validator: (value) => value in BackgroundColor,
+      validator: (value) => value.toUpperCase() in BackgroundColor,
     },
+    /**
+     * Display the dial background
+     */
     backgroundVisible: {
-      default: undefined,
+      default: true,
       required: false,
       type: [Boolean, String],
     },
+    /**
+     * Set layer passed to the canvas drawImage. The specification permits
+     * any canvas image source (CanvasImageSource)
+     */
     customLayer: {
       default: undefined,
       required: false,
     },
+    /**
+     * Uses LCD font the LCD display
+     */
     digitalFont: {
-      default: undefined,
+      default: false,
       required: false,
-      type: String,
+      type: [Boolean, String],
     },
-    // TYPE1 to TYPE5
+    /**
+     * Sets the foreground styling type
+     * @values TYPE1 through TYPE5
+     */
     foregroundType: {
-      default: undefined,
+      default: "TYPE1",
       required: false,
       type: String,
-      validator: (value) => value in ForegroundType,
+      validator: (value) => value.toUpperCase() in ForegroundType,
     },
+    /**
+     * Display the foreground style (from foregroundType) on the dial
+     */
     foregroundVisible: {
-      default: undefined,
+      default: true,
       required: false,
       type: [Boolean, String],
     },
+    /**
+     * Number of fraction digits to show on scale
+     */
     fractionalScaleDecimals: {
-      default: undefined,
+      default: 1,
       required: false,
       type: [Number, String],
       validator: (value) => !Number.isNaN(value),
     },
-    // BLACK_METAL, METAL, SHINY_METAL, BRASS, STEEL, CHROME, GOLD, ANTHRACITE, TILTED_GRAY,
-    // TILTED_BLACK, GLOSSY_METAL
+    /**
+     * Select the frame design style used on the dial
+     * @values BLACK_METAL, METAL, SHINY_METAL, BRASS, STEEL, CHROME, GOLD, ANTHRACITE,
+     *         TILTED_GRAY, TILTED_BLACK, GLOSSY_METAL
+     */
     frameDesign: {
-      default: undefined,
+      default: "METAL",
       required: false,
       type: String,
-      validator: (value) => value in FrameDesign,
+      validator: (value) => value.toUpperCase() in FrameDesign,
     },
+    /**
+     * Display the frame (with the frameDesign selected) around the dial
+     */
     frameVisible: {
-      default: undefined,
+      default: true,
       required: false,
       type: [Boolean, String],
     },
+    /**
+     * Sets the maximum tween time for animation, reduce this to speed up the movement
+     */
     fullScaleDeflectionTime: {
-      default: undefined,
+      default: 2.5,
       required: false,
       type: [Number, String],
       validator: (value) => !Number.isNaN(value),
     },
-    // TYPE1 through TYPE5
+    /**
+     * Set the gauge from one quarter of the display to full
+     * @values TYPE1 (quarter) through TYPE4 (full)
+     */
     gaugeType: {
-      default: undefined,
+      default: "TYPE4",
       required: false,
       type: String,
-      validator: (value) => value in GaugeType,
+      validator: (value) => value.toUpperCase() in GaugeType,
     },
-    // BLACK, BRASS, SILVER
+    /**
+     * Sets the knob (where the hands connect in the center) design style
+     * @values BLACK, BRASS, SILVER
+     */
     knobStyle: {
-      default: undefined,
+      default: "SILVER",
       required: false,
       type: String,
-      validator: (value) => value in KnobStyle,
+      validator: (value) => value.toUpperCase() in KnobStyle,
     },
-    // STANDARD_KNOB, METAL_KNOB
+    /**
+     * Sets the knob (where the hands connect in the center) type
+     * @values STANDARD_KNOB, METAL_KNOB
+     */
     knobType: {
-      default: undefined,
+      default: "STANDARD_KNOB",
       required: false,
       type: String,
-      validator: (value) => value in KnobType,
+      validator: (value) => value.toUpperCase() in KnobType,
     },
+    /**
+     * Set the label number format for the scale.
+     * STANDARD shows integer,
+     * FRACTIONAL shows 2 fixed decimal places,
+     * SCIENTIFIC shows to 2 significant digits
+     * @values STANDARD, FRACTIONAL, SCIENTIFIC
+     */
     labelNumberFormat: {
-      default: undefined,
+      default: "STANDARD",
       required: false,
       type: String,
+      validator: (value) => value.toUpperCase() in LabelNumberFormat,
     },
+    /**
+     * Sets the color of the LCD background
+     * @values BEIGE, BLUE, ORANGE, RED, YELLOW, WHITE, GRAY, BLACK, GREEN, BLUE2, BLUE_BLACK,
+     * BLUE_DARKBLUE, BLUE_GRAY, STANDARD, STANDARD_GREEN, BLUE_BLUE, RED_DARKRED, DARKBLUE,
+     * LILA, BLACKRED, DARKGREEN, AMBER, LIGHTBLUE, SECTIONS
+     */
     lcdColor: {
-      default: undefined,
+      default: "STANDARD",
       required: false,
       type: String,
-      validator: (value) => value in LcdColor,
+      validator: (value) => value.toUpperCase() in LcdColor,
     },
+    /**
+     * Set the number of decimal places displayed on the LCD
+     */
     lcdDecimals: {
-      default: undefined,
+      default: 2,
       required: false,
       type: [Number, String],
       validator: (value) => !Number.isNaN(value),
     },
+    /**
+     * Display the LCD displays (latest and average) in the dial
+     * @values Boolean (defaults to true)
+     */
     lcdVisible: {
-      default: undefined,
+      default: true,
       required: false,
       type: [Boolean, String],
     },
+    /**
+     * Set the LED color used to indicate values are over the set threshold
+     * @values RED_LED, GREEN_LED, BLUE_LED, ORANGE_LED, YELLOW_LED, CYAN_LED, MAGENTA_LED
+     */
     ledColor: {
-      default: undefined,
+      default: "RED_LED",
       required: false,
       type: String,
-      validator: (value) => value in LedColor,
+      validator: (value) => value.toUpperCase() in LedColor,
     },
+    /**
+     * Enable the display of the LED over threshold indicator
+     */
     ledVisible: {
-      default: undefined,
+      default: true,
       required: false,
       type: [Boolean, String],
     },
+    /**
+     * Enable the display of the maximum measured value
+     */
     maxMeasuredValueVisible: {
-      default: undefined,
+      default: false,
       required: false,
       type: [Boolean, String],
     },
+    /**
+     * Set the maximum value for the scale (Defaults to the minimum value plus 100)
+     */
     maxValue: {
       default: undefined,
       required: false,
       type: [Number, String],
       validator: (value) => !Number.isNaN(value),
     },
+    /**
+     * Enable the display of the minimum measured value
+     */
     minMeasuredValueVisible: {
       default: undefined,
       required: false,
       type: [Boolean, String],
     },
+    /**
+     * Set the minimum value for the scale
+     */
     minValue: {
-      default: undefined,
+      default: 0,
       required: false,
       type: [Number, String],
       validator: (value) => !Number.isNaN(value),
     },
+    /**
+     * Calculate nice values for min, max and range for the tickmarks
+     */
     niceScale: {
-      default: undefined,
+      default: true,
       required: false,
       type: [Boolean, String],
     },
-    odometerParams: {
-      default: undefined,
+    /**
+     * Odometer - Set number of fraction digits to display
+     */
+    odoDecimals: {
+      default: 1,
       required: false,
-      type: Object,
+      type: [Number, String],
+      validator: (value) => !Number.isNaN(value),
     },
-    odometerUseValue: {
-      default: undefined,
+    /**
+     * Odometer - HTML background color
+     */
+    odoBackColor: {
+      default: "#F0F0F0",
+      required: false,
+      type: String,
+    },
+    /**
+     * Odometer - HTML foreground color
+     */
+    odoForeColor: {
+      default: "#F01010",
+      required: false,
+      type: String,
+    },
+    /**
+     * Odometer - Set number of whole digits to display
+     */
+    odoDigits: {
+      default: 6,
+      required: false,
+      type: [Number, String],
+      validator: (value) => !Number.isNaN(value),
+    },
+    /**
+     * Odometer - Set the font to use
+     */
+    odoFont: {
+      default: "sans-serif",
+      required: false,
+      type: String,
+    },
+    /**
+     * Odometer - HTML color of the value foreground
+     */
+    odoValueForeColor: {
+      default: "#F8F8F8",
+      required: false,
+      type: String,
+    },
+    /**
+     * Odometer - HTML color of the value background
+     */
+    odoValueBackColor: {
+      default: "#050505",
+      required: false,
+      type: String,
+    },
+    /**
+     * Set to enable to use the radial value for the odometer value
+     */
+    odoUseValue: {
+      default: false,
       required: false,
       type: [Boolean, String],
     },
-    odometerValue: {
+    /**
+     * If odoUseValue is not enabled, set the value to be displayed by the odometer
+     */
+    odoValue: {
       default: undefined,
       required: false,
       type: [Number, String],
       validator: (value) => !Number.isNaN(value),
     },
+    /**
+     * Enable playing the alarm sound (if defined) when theshold is exceeded
+     */
     playAlarm: {
       default: undefined,
       required: false,
       type: [Boolean, String],
     },
+    /**
+     * Sets the color of the latest value pointer in the dial
+     * @values RED, GREEN, BLUE, ORANGE, YELLOW, CYAN, MAGENTA, WHITE, GRAY, BLACK,
+     * RAITH, GREEN_LCD, JUG_GREEN
+     */
     pointerColor: {
-      default: undefined,
+      default: "RED",
       required: false,
       type: String,
-      validator: (value) => value in ColorDef,
+      validator: (value) => value.toUpperCase() in ColorDef,
     },
-    // TYPE1 through TYPE16
+    /**
+     * Sets the design type of the latest value pointer in the dial
+     * @values TYPE1 through TYPE16
+     */
     pointerType: {
-      default: undefined,
+      default: "TYPE1",
       required: false,
       type: String,
-      validator: (value) => value in PointerType,
+      validator: (value) => value.toUpperCase() in PointerType,
     },
+    /**
+     * Set the size in pixels of the canvas (height and width)
+     */
     size: {
       default: undefined,
       required: false,
       type: [Number, String],
       validator: (value) => toNumber(value) > 0,
     },
+    /**
+     * Set the threshold marker (defaults to half way between min and max values)
+     */
     threshold: {
       default: undefined,
       required: false,
       type: [Number, String],
       validator: (value) => !Number.isNaN(value),
     },
+    /**
+     * Set true if threashold should be exceeded when value rises above it (false means below)
+     */
     thresholdRising: {
       default: undefined,
       required: false,
       type: [Boolean, String],
     },
+    /**
+     * Set to enable the display of the threshold marker on the scale
+     */
     thresholdVisible: {
       default: undefined,
       required: false,
       type: [Boolean, String],
     },
+    /**
+     * Force the tick orientation, default is based on gauge type
+     * @values NORMAL or TANGENT
+     */
     tickLabelOrientation: {
       default: undefined,
       required: false,
       type: String,
-      validator: (value) => value in TickLabelOrientation,
+      validator: (value) => value.toUpperCase() in TickLabelOrientation,
     },
+    /**
+     * Sets the gauge title
+     */
     title: {
       default: undefined,
       required: false,
@@ -246,27 +422,43 @@ export default {
       required: false,
       type: [Boolean, String],
     },
+    /**
+     * Sets the unit values
+     */
     unit: {
       default: undefined,
       required: false,
       type: String,
     },
+    /**
+     * Enable the odometer display
+     */
     useOdometer: {
       default: undefined,
       required: false,
       type: [Boolean, String],
     },
+    /**
+     * If the user LED is enabled, set the color
+     * @values RED_LED, GREEN_LED, BLUE_LED, ORANGE_LED, YELLOW_LED, CYAN_LED, MAGENTA_LED
+     */
     userLedColor: {
       default: undefined,
       required: false,
       type: String,
-      validator: (value) => value in LedColor,
+      validator: (value) => value.toUpperCase() in LedColor,
     },
+    /**
+     * Show the user LED on the gauge
+     */
     userLedVisible: {
-      default: undefined,
+      default: false,
       required: false,
       type: [Boolean, String],
     },
+    /**
+     * Set the value shown on the gauge (and odometer if odoUseValue is set)
+     */
     value: {
       required: true,
       type: [Number, String],
@@ -282,51 +474,60 @@ export default {
     draw() {
       this.gauge = new Radial(this.$refs["view"], {
         alarmSound: this.alarmSound,
-        backgroundColor: BackgroundColor[this.backgroundColor],
+        backgroundColor: BackgroundColor[toUpper(this.backgroundColor)],
         backgroundVisible: toBoolean(this.backgroundVisible),
         customLayer: this.customLayer,
-        digitalFont: this.digitalFont,
-        foregroundType: ForegroundType[this.foregroundType],
+        digitalFont: toBoolean(this.digitalFont),
+        foregroundType: ForegroundType[toUpper(this.foregroundType)],
         foregroundVisible: toBoolean(this.foregroundVisible),
         fractionalScaleDecimals: toNumber(this.fractionalScaleDecimals),
-        frameDesign: FrameDesign[this.frameDesign],
+        frameDesign: FrameDesign[toUpper(this.frameDesign)],
         frameVisible: toBoolean(this.frameVisible),
         fullScaleDeflectionTime: toNumber(this.fullScaleDeflectionTime),
-        gaugeType: GaugeType[this.gaugeType],
-        knobStyle: KnobStyle[this.knobStyle],
-        knobType: KnobType[this.knobType],
-        labelNumberFormat: LabelNumberFormat[this.labelNumberFormat],
-        lcdColor: LcdColor[this.lcdColor],
+        gaugeType: GaugeType[toUpper(this.gaugeType)],
+        knobStyle: KnobStyle[toUpper(this.knobStyle)],
+        knobType: KnobType[toUpper(this.knobType)],
+        labelNumberFormat: LabelNumberFormat[toUpper(this.labelNumberFormat)],
+        lcdColor: LcdColor[toUpper(this.lcdColor)],
         lcdDecimals: toNumber(this.lcdDecimals),
         lcdVisible: toBoolean(this.lcdVisible),
-        ledColor: LedColor[this.ledColor],
+        ledColor: LedColor[toUpper(this.ledColor)],
         ledVisible: toBoolean(this.ledVisible),
         maxMeasuredValueVisible: toBoolean(this.maxMeasuredValueVisible),
         maxValue: toNumber(this.maxValue),
         minMeasuredValueVisible: toBoolean(this.minMeasuredValueVisible),
         minValue: toNumber(this.minValue),
         niceScale: toNumber(this.niceScale),
-        odometerParams: this.odometerParams,
-        odometerUseValue: toBoolean(this.odometerUseValue),
+        odometerParams: {
+          decimals: toNumber(this.odoDecimals),
+          digits: toNumber(this.odoDigits),
+          valueForeColor: this.odoValueForeColor,
+          valueBackColor: this.odoValueBackColor,
+          decimalForeColor: this.odoForeColor,
+          deciamlBackColor: this.odoBackColor,
+          font: this.odoFont,
+          value: toNumber(this.odoValue),
+        },
+        odometerUseValue: toBoolean(this.odoUseValue),
         playAlarm: toBoolean(this.playAlarm),
-        pointerColor: ColorDef[this.pointerColor],
-        pointerType: PointerType[this.pointerType],
+        pointerColor: ColorDef[toUpper(this.pointerColor)],
+        pointerType: PointerType[toUpper(this.pointerType)],
         size: toNumber(this.size),
         threshold: toNumber(this.threshold),
         thresholdRising: toBoolean(this.thresholdRising),
         thresholdVisible: toBoolean(this.thresholdVisible),
-        tickLabelOrientation: TickLabelOrientation[this.tickLabelOrientation],
+        tickLabelOrientation:
+          TickLabelOrientation[toUpper(this.tickLabelOrientation)],
         titleString: this.title,
         trendColors: this.trendColors,
         trendVisible: toBoolean(this.trendVisible),
         unitString: this.unit,
         useOdometer: toBoolean(this.useOdometer),
-        userLedColor: LedColor[this.userLedColor],
+        userLedColor: LedColor[toUpper(this.userLedColor)],
         userLedVisible: toBoolean(this.userLedVisible),
       });
       this.value && this.gauge.setValue(toNumber(this.value));
-      this.odometerValue &&
-        this.gauge.setOdoValue(toNumber(this.odometerValue));
+      this.odometerValue && this.gauge.setOdoValue(toNumber(this.odoValue));
     },
   },
   mounted() {
@@ -334,29 +535,31 @@ export default {
   },
   watch: {
     backgroundColor(newValue) {
-      this.gauge && this.gauge.setBackgroundColor(BackgroundColor[newValue]);
+      this.gauge &&
+        this.gauge.setBackgroundColor(BackgroundColor[toUpper(newValue)]);
     },
     fractionalScaleDecimals(newValue) {
       this.gauge && this.gauge.setFractionalScaleDecimals(toNumber(newValue));
     },
     frameDesign(newValue) {
-      this.gauge && this.gauge.setFrameDesign(FrameDesign[newValue]);
+      this.gauge && this.gauge.setFrameDesign(FrameDesign[toUpper(newValue)]);
     },
     foregroundType(newValue) {
-      this.gauge && this.gauge.setForegroundType(ForegroundType[newValue]);
+      this.gauge &&
+        this.gauge.setForegroundType(ForegroundType[toUpper(newValue)]);
     },
     labelNumberFormat(newValue) {
       this.gauge &&
-        this.gauge.setLabelNumberFormat(LabelNumberFormat[newValue]);
+        this.gauge.setLabelNumberFormat(LabelNumberFormat[toUpper(newValue)]);
     },
     lcdColor(newValue) {
-      this.gauge && this.gauge.setLcdColor(LcdColor[newValue]);
+      this.gauge && this.gauge.setLcdColor(LcdColor[toUpper(newValue)]);
     },
     lcdDecimals(newValue) {
       this.gauge && this.gauge.setLcdDecimals(toNumber(newValue));
     },
     ledColor(newValue) {
-      this.gauge && this.gauge.setLedColor(LedColor[newValue]);
+      this.gauge && this.gauge.setLedColor(LedColor[toUpper(newValue)]);
     },
     maxMeasuredValue(newValue) {
       this.gauge && this.gauge.setMaxMeasuredValue(toNumber(newValue));
@@ -380,10 +583,10 @@ export default {
       this.gauge && this.gauge.setOdoValue(toNumber(newValue));
     },
     pointerColor(newValue) {
-      this.gauge && this.gauge.setPointerColor(ColorDef[newValue]);
+      this.gauge && this.gauge.setPointerColor(ColorDef[toUpper(newValue)]);
     },
     pointerType(newValue) {
-      this.gauge && this.gauge.setPointerType(PointerType[newValue]);
+      this.gauge && this.gauge.setPointerType(PointerType[toUpper(newValue)]);
     },
     size() {
       this.draw();
@@ -407,7 +610,7 @@ export default {
       this.gauge && this.gauge.setUnitString(newValue);
     },
     userLedColor(newValue) {
-      this.gauge && this.gauge.setUserLedColor(LedColor[newValue]);
+      this.gauge && this.gauge.setUserLedColor(LedColor[toUpper(newValue)]);
     },
     userLedVisible(newValue) {
       this.gauge && this.gauge.setUserLedVisible(toBoolean(newValue));

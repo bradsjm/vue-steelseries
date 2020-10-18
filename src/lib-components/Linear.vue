@@ -166,9 +166,10 @@ export default {
     },
     /**
      * Set the LED color used to indicate values are over the set threshold
+     * @values RED_LED, GREEN_LED, BLUE_LED, ORANGE_LED, YELLOW_LED, CYAN_LED, MAGENTA_LED
      */
     ledColor: {
-      default: "RED",
+      default: "RED_LED",
       required: false,
       type: String,
       validator: (value) => value.toUpperCase() in LedColor,
@@ -283,6 +284,8 @@ export default {
     },
     /**
      * Set the color of the value display
+     * @values RED, GREEN, BLUE, ORANGE, YELLOW, CYAN, MAGENTA, WHITE, GRAY, BLACK,
+     * RAITH, GREEN_LCD, JUG_GREEN
      */
     valueColor: {
       default: "RED",

@@ -167,7 +167,7 @@ export default {
      * Set to enable the second hand to be displayed
      */
     secondPointerVisible: {
-      default: ture,
+      default: true,
       required: false,
       type: [Boolean, String],
     },

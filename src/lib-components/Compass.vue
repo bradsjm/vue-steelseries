@@ -134,7 +134,7 @@ export default {
       default: "TYPE1",
       required: false,
       type: String,
-      validator: (value) => value in PointerType,
+      validator: (value) => value.toUpperCase() in PointerType,
     },
     /**
      * Sets the symbols of the 8 compass points around the dial
