@@ -36,4 +36,10 @@
 | valueColor              | Set the color of the value display                                                                                                                            | string          | -                                                                                                                                                                                                                                                                           | "RED"       |
 | width                   | Set the height of the canvas                                                                                                                                  | number\|string  | -                                                                                                                                                                                                                                                                           | undefined   |
 
+## Slots
+
+| Name    | Description | Bindings |
+| ------- | ----------- | -------- |
+| default |             |          |
+
 ---

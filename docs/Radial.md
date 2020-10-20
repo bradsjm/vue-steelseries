@@ -57,4 +57,10 @@
 | userLedVisible          | Show the user LED on the gauge                                                                                                                                | boolean\|string | -                                                                                                                                                                                                                                                                           | false           |
 | value                   | Set the value shown on the gauge (and odometer if odoUseValue is set)                                                                                         | number\|string  | -                                                                                                                                                                                                                                                                           |                 |
 
+## Slots
+
+| Name    | Description | Bindings |
+| ------- | ----------- | -------- |
+| default |             |          |
+
 ---

@@ -4,7 +4,7 @@ import { Section } from "steelseries";
 import { toNumber } from "./util";
 
 /**
- * Gauge Area
+ * Gauge Area for use with Radial and RadialVertical
  * @displayName Gauge Area
  */
 export default {

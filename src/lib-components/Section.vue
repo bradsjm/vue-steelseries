@@ -4,7 +4,7 @@ import { Section } from "steelseries";
 import { toNumber } from "./util";
 
 /**
- * Gauge Section
+ * Gauge Section for use with Radial, RadialVertical, RadialBargraph and LinearBargraph
  * @displayName Gauge Section
  */
 export default {

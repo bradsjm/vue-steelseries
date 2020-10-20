@@ -41,4 +41,10 @@
 | value                   | Set the value shown on the gauge (and odometer if odoUseValue is set)                                                                                         | number\|string  | -                                                                                                                                                                                                                                                                           |             |
 | valueColor              | Value LED active color                                                                                                                                        | string          | -                                                                                                                                                                                                                                                                           | "RED"       |
 
+## Slots
+
+| Name    | Description | Bindings |
+| ------- | ----------- | -------- |
+| default |             |          |
+
 ---

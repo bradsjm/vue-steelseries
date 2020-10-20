@@ -36,4 +36,10 @@
 | unit                    | Sets the unit values                                                                                                                                          | string          | -                                                                                                                                                                                                                | undefined       |
 | value                   | Set the value shown on the gauge                                                                                                                              | number\|string  | -                                                                                                                                                                                                                |                 |
 
+## Slots
+
+| Name    | Description | Bindings |
+| ------- | ----------- | -------- |
+| default |             |          |
+
 ---
