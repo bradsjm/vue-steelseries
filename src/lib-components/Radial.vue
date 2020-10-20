@@ -1,5 +1,5 @@
 <template>
-  <canvas ref="view"></canvas>
+  <canvas ref="view"><slot /></canvas>
 </template>
 
 <script>
@@ -471,12 +471,15 @@ export default {
   data() {
     return {
       gauge: null,
+      sections: new Map(),
+      areas: new Map(),
     };
   },
   methods: {
     draw() {
       this.gauge = new Radial(this.$refs["view"], {
         alarmSound: this.alarmSound,
+        area: [...this.areas.values()],
         backgroundColor: BackgroundColor[toUpper(this.backgroundColor)],
         backgroundVisible: toBoolean(this.backgroundVisible),
         customLayer: this.customLayer,
@@ -515,6 +518,7 @@ export default {
         playAlarm: toBoolean(this.playAlarm),
         pointerColor: ColorDef[toUpper(this.pointerColor)],
         pointerType: PointerType[toUpper(this.pointerType)],
+        section: [...this.sections.values()],
         size: toNumber(this.size),
         threshold: toNumber(this.threshold),
         thresholdRising: toBoolean(this.thresholdRising),
@@ -532,9 +536,31 @@ export default {
       this.value && this.gauge.setValue(toNumber(this.value));
       this.odometerValue && this.gauge.setOdoValue(toNumber(this.odoValue));
     },
+    setArea(id, area = undefined) {
+      if (undefined === area) {
+        this.areas.delete(id);
+      } else {
+        this.areas.set(id, area);
+      }
+      this.gauge && this.gauge.setArea([...this.areas.values()]);
+    },
+    setSection(id, section = undefined) {
+      if (undefined === section) {
+        this.sections.delete(id);
+      } else {
+        this.sections.set(id, section);
+      }
+      this.gauge && this.gauge.setSection([...this.sections.values()]);
+    },
   },
   mounted() {
     this.draw();
+  },
+  provide() {
+    return {
+      setArea: this.setArea,
+      setSection: this.setSection,
+    };
   },
   watch: {
     backgroundColor(newValue) {

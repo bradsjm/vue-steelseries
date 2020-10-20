@@ -425,7 +425,19 @@
             unit="Type2"
             threshold="50"
             lcdVisible="true"
-          />
+          >
+            <Section start="0" end="15" color="rgba(25, 112, 210, 0.4)" />
+            <Section start="15" end="25" color="rgba(9, 150, 224, 0.4)" />
+            <Section start="25" end="32" color="rgba(2, 170, 209, 0.4)" />
+            <Section start="32" end="40" color="rgba(0, 162, 145, 0.4)" />
+            <Section start="40" end="50" color="rgba(0, 158, 122, 0.4)" />
+            <Section start="40" end="50" color="rgba(0, 158, 122, 0.4)" />
+            <Section start="50" end="60" color="rgba(54, 177, 56, 0.4)" />
+            <Section start="60" end="70" color="rgba(111, 202, 56, 0.4)" />
+            <Section start="70" end="80" color="rgba(248, 233, 45, 0.4)" />
+            <Section start="80" end="90" color="rgba(253, 142, 42, 0.4)" />
+            <Section start="90" end="100" color="rgba(236, 45, 45, 0.4)" />
+          </RadialBargraph>
         </td>
         <td align="center">
           <RadialBargraph
@@ -444,7 +456,19 @@
             unit="Type3"
             threshold="50"
             lcdVisible="true"
-          />
+          >
+            <Section start="0" end="15" color="rgba(25, 112, 210, 0.4)" />
+            <Section start="15" end="25" color="rgba(9, 150, 224, 0.4)" />
+            <Section start="25" end="32" color="rgba(2, 170, 209, 0.4)" />
+            <Section start="32" end="40" color="rgba(0, 162, 145, 0.4)" />
+            <Section start="40" end="50" color="rgba(0, 158, 122, 0.4)" />
+            <Section start="40" end="50" color="rgba(0, 158, 122, 0.4)" />
+            <Section start="50" end="60" color="rgba(54, 177, 56, 0.4)" />
+            <Section start="60" end="70" color="rgba(111, 202, 56, 0.4)" />
+            <Section start="70" end="80" color="rgba(248, 233, 45, 0.4)" />
+            <Section start="80" end="90" color="rgba(253, 142, 42, 0.4)" />
+            <Section start="90" end="100" color="rgba(236, 45, 45, 0.4)" />
+          </RadialBargraph>
         </td>
         <td align="center">
           <RadialBargraph
@@ -462,7 +486,19 @@
             unit="Type4"
             threshold="50"
             lcdVisible="true"
-          />
+          >
+            <Section start="0" end="15" color="rgba(25, 112, 210, 0.4)" />
+            <Section start="15" end="25" color="rgba(9, 150, 224, 0.4)" />
+            <Section start="25" end="32" color="rgba(2, 170, 209, 0.4)" />
+            <Section start="32" end="40" color="rgba(0, 162, 145, 0.4)" />
+            <Section start="40" end="50" color="rgba(0, 158, 122, 0.4)" />
+            <Section start="40" end="50" color="rgba(0, 158, 122, 0.4)" />
+            <Section start="50" end="60" color="rgba(54, 177, 56, 0.4)" />
+            <Section start="60" end="70" color="rgba(111, 202, 56, 0.4)" />
+            <Section start="70" end="80" color="rgba(248, 233, 45, 0.4)" />
+            <Section start="80" end="90" color="rgba(253, 142, 42, 0.4)" />
+            <Section start="90" end="100" color="rgba(236, 45, 45, 0.4)" />
+          </RadialBargraph>
         </td>
       </tr>
       <tr>
@@ -485,7 +521,20 @@
             title="Title"
             unit="North"
             threshold="50"
-          />
+          >
+            <Area start="65" end="85" color="rgba(212,132,134,0.3)" />
+            <Section start="0" end="15" color="rgba(25, 112, 210, 0.4)" />
+            <Section start="15" end="25" color="rgba(9, 150, 224, 0.4)" />
+            <Section start="25" end="32" color="rgba(2, 170, 209, 0.4)" />
+            <Section start="32" end="40" color="rgba(0, 162, 145, 0.4)" />
+            <Section start="40" end="50" color="rgba(0, 158, 122, 0.4)" />
+            <Section start="40" end="50" color="rgba(0, 158, 122, 0.4)" />
+            <Section start="50" end="60" color="rgba(54, 177, 56, 0.4)" />
+            <Section start="60" end="70" color="rgba(111, 202, 56, 0.4)" />
+            <Section start="70" end="80" color="rgba(248, 233, 45, 0.4)" />
+            <Section start="80" end="90" color="rgba(253, 142, 42, 0.4)" />
+            <Section start="90" end="100" color="rgba(236, 45, 45, 0.4)" />
+          </RadialVertical>
         </td>
         <td align="center">
           <RadialVertical
@@ -540,7 +589,21 @@
             lcdDecimals="1"
             useOdometer="true"
             userLedVisible="true"
-          />
+          >
+            <Area start="65" end="85" color="rgba(212,132,134,0.3)" />
+            <Section start="0" end="15" color="rgba(25, 112, 210, 0.4)" />
+            <Section start="15" end="25" color="rgba(9, 150, 224, 0.4)" />
+            <Section start="25" end="32" color="rgba(2, 170, 209, 0.4)" />
+            <Section start="32" end="40" color="rgba(0, 162, 145, 0.4)" />
+            <Section start="40" end="50" color="rgba(0, 158, 122, 0.4)" />
+            <Section start="40" end="50" color="rgba(0, 158, 122, 0.4)" />
+            <Section start="50" end="60" color="rgba(54, 177, 56, 0.4)" />
+            <Section start="60" end="70" color="rgba(111, 202, 56, 0.4)" />
+            <Section start="70" end="80" color="rgba(248, 233, 45, 0.4)" />
+            <Section start="80" end="90" color="rgba(253, 142, 42, 0.4)" />
+            <Section start="90" end="110" color="rgba(236, 45, 45, 0.4)" />
+            <Section start="110" end="200" color="rgba(245, 109, 205, 0.4)" />
+          </Radial>
         </td>
       </tr>
 
@@ -745,6 +808,7 @@
 import Vue from "vue";
 import {
   Altimeter,
+  Area,
   Battery,
   Clock,
   Compass,
@@ -760,6 +824,7 @@ import {
   Radial,
   RadialBargraph,
   RadialVertical,
+  Section,
   StopWatch,
   TrafficLight,
   WindDirection,
@@ -769,6 +834,7 @@ export default Vue.extend({
   name: "ServeDev",
   components: {
     Altimeter,
+    Area,
     Battery,
     Clock,
     Compass,
@@ -784,6 +850,7 @@ export default Vue.extend({
     Radial,
     RadialBargraph,
     RadialVertical,
+    Section,
     StopWatch,
     TrafficLight,
     WindDirection,

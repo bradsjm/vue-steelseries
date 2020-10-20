@@ -1,5 +1,5 @@
 <template>
-  <canvas ref="view"></canvas>
+  <canvas ref="view"><slot /></canvas>
 </template>
 
 <script>
@@ -335,6 +335,7 @@ export default {
   data() {
     return {
       gauge: null,
+      sections: new Map(),
     };
   },
   methods: {
@@ -362,6 +363,7 @@ export default {
         minValue: toNumber(this.minValue),
         niceScale: toNumber(this.niceScale),
         playAlarm: toBoolean(this.playAlarm),
+        section: [...this.sections.values()],
         size: toNumber(this.size),
         threshold: toNumber(this.threshold),
         thresholdRising: toBoolean(this.thresholdRising),
@@ -371,15 +373,31 @@ export default {
         //        trendColors: this.trendColors,
         //        trendVisible: toBoolean(this.trendVisible),
         unitString: this.unit,
+        useSectionColors: true,
+        //        useValueGradiant: this.valueGradiant !== undefined,
         userLedColor: LedColor[toUpper(this.userLedColor)],
         userLedVisible: toBoolean(this.userLedVisible),
         valueColor: ColorDef[toUpper(this.valueColor)],
+        //        valueGradient: this.valueGradient,
       });
       this.value && this.gauge.setValue(toNumber(this.value));
+    },
+    setSection(id, section = undefined) {
+      if (undefined === section) {
+        this.sections.delete(id);
+      } else {
+        this.sections.set(id, section);
+      }
+      this.gauge && this.gauge.setSection([...this.sections.values()]);
     },
   },
   mounted() {
     this.draw();
+  },
+  provide() {
+    return {
+      setSection: this.setSection,
+    };
   },
   watch: {
     backgroundColor(newValue) {
@@ -448,6 +466,10 @@ export default {
     value(newValue) {
       this.gauge && this.gauge.setValueAnimated(toNumber(newValue));
     },
+    // valueGradient(newValue) {
+    //   this.gauge && this.gauge.setGradient(newValue);
+    //   this.gauge && this.gauge.setGradientActive(newValue !== undefined);
+    // },
   },
 };
 </script>
