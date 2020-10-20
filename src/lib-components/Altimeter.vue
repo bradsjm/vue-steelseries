@@ -13,7 +13,7 @@ import {
   ForegroundType,
 } from "steelseries";
 
-import { toBoolean, toNumber, toUpper } from "./util";
+import { toBoolean, toNumber, toImage, toUpper } from "./util";
 
 /**
  * Displays altimeter gauge.
@@ -42,12 +42,12 @@ export default {
       type: [Boolean, String],
     },
     /**
-     * Set layer passed to the canvas drawImage. The specification permits
-     * any canvas image source (CanvasImageSource)
+     * Set custom layer to specified image source/url
      */
     customLayer: {
       default: undefined,
       required: false,
+      type: String,
     },
     /**
      * Uses LCD font the LCD display
@@ -187,7 +187,7 @@ export default {
       this.gauge = new Altimeter(this.$refs["view"], {
         backgroundColor: BackgroundColor[toUpper(this.backgroundColor)],
         backgroundVisible: toBoolean(this.backgroundVisible),
-        customLayer: this.customLayer,
+        customLayer: toImage(this.customLayer),
         digitalFont: toBoolean(this.digitalFont),
         foregroundType: ForegroundType[toUpper(this.foregroundType)],
         foregroundVisible: toBoolean(this.foregroundVisible),

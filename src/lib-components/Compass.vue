@@ -14,7 +14,7 @@ import {
   ForegroundType,
 } from "steelseries";
 
-import { toBoolean, toNumber, toUpper } from "./util";
+import { toBoolean, toNumber, toImage, toUpper } from "./util";
 
 /**
  * Displays directional compass dial.
@@ -43,12 +43,12 @@ export default {
       type: [Boolean, String],
     },
     /**
-     * Set layer passed to the canvas drawImage. The specification permits
-     * any canvas image source (CanvasImageSource)
+     * Set custom layer to specified image source/url
      */
     customLayer: {
       default: undefined,
       required: false,
+      type: String,
     },
     /**
      * Display degrees around the dial edge from 0 to 360 in 20 degree increments
@@ -200,7 +200,7 @@ export default {
       this.gauge = new Compass(this.$refs["view"], {
         backgroundColor: BackgroundColor[toUpper(this.backgroundColor)],
         backgroundVisible: toBoolean(this.backgroundVisible),
-        customLayer: this.customLayer,
+        customLayer: toImage(this.customLayer),
         degreeScale: toBoolean(this.degreeScale),
         foregroundType: ForegroundType[toUpper(this.foregroundType)],
         foregroundVisible: toBoolean(this.foregroundVisible),

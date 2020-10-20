@@ -12,7 +12,7 @@ import {
   ForegroundType,
 } from "steelseries";
 
-import { toBoolean, toNumber, toUpper } from "./util";
+import { toBoolean, toNumber, toImage, toUpper } from "./util";
 
 /**
  * Displays a clock dial that can either be set manually or run automatically
@@ -27,7 +27,7 @@ export default {
      * TURNED, ANTHRACITE, MUD, PUNCHED_SHEET, CARBON, STAINLESS, BRUSHED_METAL, BRUSHED_STAINLESS
      */
     backgroundColor: {
-      default: "DARK_GRAY",
+      default: undefined,
       required: false,
       type: String,
       validator: (value) => value.toUpperCase() in BackgroundColor,
@@ -41,14 +41,12 @@ export default {
       type: [Boolean, String],
     },
     /**
-     * Set layer passed to the canvas drawImage. The specification permits
-     * any canvas image source (CanvasImageSource), specifically, a CSSImageValue,
-     * an HTMLImageElement, an SVGImageElement, an HTMLVideoElement, an HTMLCanvasElement,
-     * an ImageBitmap, or an OffscreenCanvas.
+     * Set custom layer to specified image source/url
      */
     customLayer: {
       default: undefined,
       required: false,
+      type: String,
     },
     /**
      * Sets the foreground styling type
@@ -121,7 +119,7 @@ export default {
      * RAITH, GREEN_LCD, JUG_GREEN
      */
     pointerColor: {
-      default: "RED",
+      default: undefined,
       required: false,
       type: String,
       validator: (value) => value.toUpperCase() in ColorDef,
@@ -200,7 +198,7 @@ export default {
       this.gauge = new Clock(this.$refs["view"], {
         backgroundColor: BackgroundColor[toUpper(this.backgroundColor)],
         backgroundVisible: toBoolean(this.backgroundVisible),
-        customLayer: this.customLayer,
+        customLayer: toImage(this.customLayer),
         foregroundType: ForegroundType[toUpper(this.foregroundType)],
         foregroundVisible: toBoolean(this.foregroundVisible),
         frameDesign: FrameDesign[toUpper(this.frameDesign)],

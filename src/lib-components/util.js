@@ -26,6 +26,13 @@ function toNumber(value) {
     : Number(value);
 }
 
+function toImage(value) {
+  if (undefined === value) return value;
+  var img = new Image();
+  img.src = value;
+  return img;
+}
+
 function toUpper(value) {
   if (undefined === value) return value;
   return "string" === typeof value
@@ -33,4 +40,4 @@ function toUpper(value) {
     : value.toString().toUpperCase();
 }
 
-export { toNumber, toBoolean, toUpper };
+export { toNumber, toBoolean, toImage, toUpper };

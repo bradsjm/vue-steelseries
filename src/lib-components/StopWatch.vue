@@ -11,7 +11,7 @@ import {
   ForegroundType,
 } from "steelseries";
 
-import { toBoolean, toNumber, toUpper } from "./util";
+import { toBoolean, toNumber, toImage, toUpper } from "./util";
 
 export default {
   name: "StopWatch",
@@ -36,13 +36,13 @@ export default {
       type: [Boolean, String],
     },
     /**
-     * Set layer passed to the canvas drawImage. The specification permits
-     * any canvas image source (CanvasImageSource)
+     * Set custom layer to specified image source/url
      */
     customLayer: {
       default: undefined,
       required: false,
-    }, // TYPE1 to TYPE5
+      type: String,
+    },
     /**
      * Sets the foreground styling type
      * @values TYPE1 through TYPE5
@@ -127,7 +127,7 @@ export default {
       this.gauge = new StopWatch(this.$refs["view"], {
         backgroundColor: BackgroundColor[toUpper(this.backgroundColor)],
         backgroundVisible: toBoolean(this.backgroundVisible),
-        customLayer: this.customLayer,
+        customLayer: toImage(this.customLayer),
         foregroundType: ForegroundType[toUpper(this.foregroundType)],
         foregroundVisible: toBoolean(this.foregroundVisible),
         frameDesign: FrameDesign[toUpper(this.frameDesign)],
