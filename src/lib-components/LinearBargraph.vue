@@ -1,5 +1,5 @@
 <template>
-  <canvas ref="view"></canvas>
+  <canvas ref="view"><slot /></canvas>
 </template>
 
 <script>
@@ -285,6 +285,7 @@ export default {
   data() {
     return {
       gauge: null,
+      sections: new Map(),
     };
   },
   methods: {
@@ -310,6 +311,7 @@ export default {
         minMeasuredValueVisible: toBoolean(this.minMeasuredValueVisible),
         minValue: toNumber(this.minValue),
         playAlarm: toBoolean(this.playAlarm),
+        section: [...this.sections.values()],
         threshold: toNumber(this.threshold),
         thresholdRising: toBoolean(this.thresholdRising),
         thresholdVisible: toBoolean(this.thresholdVisible),
@@ -320,9 +322,22 @@ export default {
       });
       this.value && this.gauge.setValue(toNumber(this.value));
     },
+    setSection(id, section = undefined) {
+      if (undefined === section) {
+        this.sections.delete(id);
+      } else {
+        this.sections.set(id, section);
+      }
+      this.gauge && this.gauge.setSection([...this.sections.values()]);
+    },
   },
   mounted() {
     this.draw();
+  },
+  provide() {
+    return {
+      setSection: this.setSection,
+    };
   },
   watch: {
     backgroundColor(newValue) {
