@@ -16,7 +16,7 @@ import {
   TickLabelOrientation,
 } from "steelseries";
 
-import { toBoolean, toNumber, toImage, toUpper } from "./util";
+import { toBoolean, toNumber, toImage, toUpper } from "../lib/util";
 
 /**
  * Radial gauge using bargraph display

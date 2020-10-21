@@ -5,7 +5,7 @@
 <script>
 import { Led, LedColor } from "steelseries";
 
-import { toBoolean, toNumber, toUpper } from "./util";
+import { toBoolean, toNumber, toUpper } from "../lib/util";
 
 /**
  * Simple LED with on, off and blinking capabilities

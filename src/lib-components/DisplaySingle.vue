@@ -5,7 +5,7 @@
 <script>
 import { DisplaySingle, LcdColor } from "steelseries";
 
-import { toBoolean, toNumber, toUpper } from "./util";
+import { toBoolean, toNumber, toUpper } from "../lib/util";
 
 /**
  * Single line LCD display

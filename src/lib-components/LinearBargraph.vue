@@ -13,7 +13,7 @@ import {
   LabelNumberFormat,
 } from "steelseries";
 
-import { toBoolean, toNumber, toUpper } from "./util";
+import { toBoolean, toNumber, toUpper } from "../lib/util";
 
 /**
  * Linear bargraph gauge (often used as rain, temperature etc.)

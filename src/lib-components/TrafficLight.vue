@@ -5,7 +5,7 @@
 <script>
 import { TrafficLight } from "steelseries";
 
-import { toBoolean, toNumber } from "./util";
+import { toBoolean, toNumber } from "../lib/util";
 
 /**
  * Traffic Light display allowing individual control of red, yellow and green LEDs

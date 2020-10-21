@@ -1,7 +1,7 @@
 <script>
 import { Section } from "steelseries";
 
-import { toNumber } from "./util";
+import { toNumber } from "../lib/util";
 
 /**
  * Gauge Section for use with Radial, RadialVertical, RadialBargraph and LinearBargraph

@@ -15,7 +15,7 @@ import {
   ForegroundType,
 } from "steelseries";
 
-import { toBoolean, toNumber, toImage, toUpper } from "./util";
+import { toBoolean, toNumber, toImage, toUpper } from "../lib/util";
 
 /**
  * Displays latest and average wind direction dial with optional LCD display of values.

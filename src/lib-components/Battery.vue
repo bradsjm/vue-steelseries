@@ -5,7 +5,7 @@
 <script>
 import { Battery } from "steelseries";
 
-import { toBoolean, toNumber } from "./util";
+import { toBoolean, toNumber } from "../lib/util";
 
 /**
  * Displays battery gauge.

@@ -16,10 +16,11 @@ import {
   PointerType,
   ForegroundType,
   LabelNumberFormat,
+  TrendState,
   TickLabelOrientation,
 } from "steelseries";
 
-import { toBoolean, toNumber, toImage, toUpper } from "./util";
+import { toBoolean, toNumber, toImage, toUpper } from "../lib/util";
 
 /**
  * Radial gauges
@@ -218,6 +219,14 @@ export default {
       type: [Boolean, String],
     },
     /**
+     * Set the maximum measured value
+     */
+    maxMeasuredValue: {
+      default: undefined,
+      required: false,
+      type: [Number, String],
+    },
+    /**
      * Enable the display of the maximum measured value
      */
     maxMeasuredValueVisible: {
@@ -233,6 +242,14 @@ export default {
       required: false,
       type: [Number, String],
       validator: (value) => !Number.isNaN(value),
+    },
+    /**
+     * Set the minimum measured value
+     */
+    minMeasuredValue: {
+      default: undefined,
+      required: false,
+      type: [Number, String],
     },
     /**
      * Enable the display of the minimum measured value
@@ -415,10 +432,23 @@ export default {
       required: false,
       type: String,
     },
-    trendColors: {
+    /**
+     * Sets the trend (if trendVisible is enabled)
+     * @values UP,STEADY,DOWN,OFF
+     */
+    trend: {
       default: undefined,
       required: false,
-      type: Array,
+      type: String,
+    },
+    /**
+     * Three LED Colors (UP,STEADY,DOWN) to use for trend display
+     * @values RED_LED, GREEN_LED, BLUE_LED, ORANGE_LED, YELLOW_LED, CYAN_LED, MAGENTA_LED
+     */
+    trendColors: {
+      default: "RED_LED,GREEN_LED,CYAN_LED",
+      required: false,
+      type: String,
     },
     trendVisible: {
       default: undefined,
@@ -526,15 +556,22 @@ export default {
         tickLabelOrientation:
           TickLabelOrientation[toUpper(this.tickLabelOrientation)],
         titleString: this.title,
-        trendColors: this.trendColors,
+        trendColors: this.trendColors
+          .split(",")
+          .map((color) => LedColor[toUpper(color)]),
         trendVisible: toBoolean(this.trendVisible),
         unitString: this.unit,
         useOdometer: toBoolean(this.useOdometer),
         userLedColor: LedColor[toUpper(this.userLedColor)],
         userLedVisible: toBoolean(this.userLedVisible),
       });
+      this.minMeasuredValue &&
+        this.gauge.setMinMeasuredValue(toNumber(this.minMeasuredValue));
+      this.maxMeasuredValue &&
+        this.gauge.setMaxMeasuredValue(toNumber(this.maxMeasuredValue));
       this.value && this.gauge.setValue(toNumber(this.value));
       this.odometerValue && this.gauge.setOdoValue(toNumber(this.odoValue));
+      this.trend && this.gauge.setTrend(TrendState[toUpper(this.trend)]);
     },
     setArea(id, area = undefined) {
       if (undefined === area) {
@@ -631,6 +668,9 @@ export default {
     },
     title(newValue) {
       this.gauge && this.gauge.setTitleString(newValue);
+    },
+    trend(newValue) {
+      this.gauge && this.gauge.setTrend(TrendState[toUpper(newValue)]);
     },
     trendVisible(newValue) {
       this.gauge && this.gauge.setTrendVisible(toBoolean(newValue));

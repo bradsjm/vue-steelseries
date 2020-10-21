@@ -5,7 +5,7 @@
 <script>
 import { DisplayMulti, LcdColor } from "steelseries";
 
-import { toBoolean, toNumber, toUpper } from "./util";
+import { toBoolean, toNumber, toUpper } from "../lib/util";
 
 /**
  * LCD Multi Line Display

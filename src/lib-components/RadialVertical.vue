@@ -17,7 +17,7 @@ import {
   LabelNumberFormat,
 } from "steelseries";
 
-import { toBoolean, toNumber, toUpper } from "./util";
+import { toBoolean, toNumber, toUpper } from "../lib/util";
 
 /**
  * Radial gauge using bargraph display

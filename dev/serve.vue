@@ -193,7 +193,8 @@
     <table width="100%">
       <tr>
         <td align="center" colspan="2"><b>Compass</b></td>
-        <td align="center" colspan="2"><b>WindDirection</b></td>
+        <td align="center"><b>Wind Direction</b></td>
+        <td align="center"><b>Wind Rose</b></td>
       </tr>
       <tr>
         <td align="center">
@@ -236,20 +237,11 @@
           />
         </td>
         <td align="center">
-          <WindDirection
+          <WindRose
             size="201"
-            :frameDesign="frameDesign"
-            :backgroundColor="backgroundColor"
-            :foregroundType="foregroundType"
-            :pointerColor="pointerColor"
-            :pointerType="pointerType"
-            :averagePointerColor="avgPointerColor"
-            :averagePointerType="avgPointerType"
-            :lcdColor="lcdColor"
-            :value="gauges.winddir.value"
-            :average="gauges.windavg.value"
-            degreeScaleHalf="true"
-            pointSymbolsVisible="false"
+            backgroundColor="BEIGE"
+            foregroundType="TYPE1"
+            frameDesign="TILTED_GRAY"
           />
         </td>
       </tr>
@@ -840,6 +832,7 @@ import {
   StopWatch,
   TrafficLight,
   WindDirection,
+  WindRose,
 } from "@/entry";
 
 export default Vue.extend({
@@ -866,6 +859,7 @@ export default Vue.extend({
     StopWatch,
     TrafficLight,
     WindDirection,
+    WindRose,
   },
   data() {
     return {

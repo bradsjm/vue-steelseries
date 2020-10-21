@@ -20,3 +20,4 @@ export { default as Section } from "./Section.vue";
 export { default as StopWatch } from "./StopWatch.vue";
 export { default as TrafficLight } from "./TrafficLight.vue";
 export { default as WindDirection } from "./WindDirection.vue";
+export { default as WindRose } from "./WindRose.vue";

@@ -5,7 +5,7 @@
 <script>
 import { Horizon, ColorDef, FrameDesign, ForegroundType } from "steelseries";
 
-import { toBoolean, toNumber, toUpper } from "./util";
+import { toBoolean, toNumber, toUpper } from "../lib/util";
 
 /**
  * Displays roll and pitch horizon gauge.

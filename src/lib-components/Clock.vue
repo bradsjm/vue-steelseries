@@ -12,7 +12,7 @@ import {
   ForegroundType,
 } from "steelseries";
 
-import { toBoolean, toNumber, toImage, toUpper } from "./util";
+import { toBoolean, toNumber, toImage, toUpper } from "../lib/util";
 
 /**
  * Displays a clock dial that can either be set manually or run automatically

@@ -5,7 +5,7 @@
 <script>
 import { LightBulb } from "steelseries";
 
-import { toBoolean, toNumber } from "./util";
+import { toBoolean, toNumber } from "../lib/util";
 
 /**
  * Simple LightBulb display with adjustable color and on/off state

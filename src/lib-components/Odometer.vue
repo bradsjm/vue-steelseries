@@ -5,7 +5,7 @@
 <script>
 import { Odometer } from "steelseries";
 
-import { toNumber } from "./util";
+import { toNumber } from "../lib/util";
 
 /**
  * Odometer display with animation and optional 'wobble' for digits
