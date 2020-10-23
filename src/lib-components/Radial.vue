@@ -533,7 +533,7 @@ export default {
         maxValue: toNumber(this.maxValue),
         minMeasuredValueVisible: toBoolean(this.minMeasuredValueVisible),
         minValue: toNumber(this.minValue),
-        niceScale: toNumber(this.niceScale),
+        niceScale: toBoolean(this.niceScale),
         odometerParams: {
           decimals: toNumber(this.odoDecimals),
           digits: toNumber(this.odoDigits),

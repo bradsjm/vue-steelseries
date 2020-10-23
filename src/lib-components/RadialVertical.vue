@@ -324,7 +324,7 @@ export default {
         maxValue: toNumber(this.maxValue),
         minMeasuredValueVisible: toBoolean(this.minMeasuredValueVisible),
         minValue: toNumber(this.minValue),
-        niceScale: toNumber(this.niceScale),
+        niceScale: toBoolean(this.niceScale),
         orientation: Orientation[toUpper(this.orientation)],
         playAlarm: toBoolean(this.playAlarm),
         pointerColor: ColorDef[toUpper(this.pointerColor)],

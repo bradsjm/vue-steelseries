@@ -361,7 +361,7 @@ export default {
         ledVisible: toBoolean(this.ledVisible),
         maxValue: toNumber(this.maxValue),
         minValue: toNumber(this.minValue),
-        niceScale: toNumber(this.niceScale),
+        niceScale: toBoolean(this.niceScale),
         playAlarm: toBoolean(this.playAlarm),
         section: [...this.sections.values()],
         size: toNumber(this.size),
