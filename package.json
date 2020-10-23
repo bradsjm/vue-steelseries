@@ -26,6 +26,7 @@
   "author": "Jonathan Bradshaw <jb@nrgup.net>",
   "license": "MIT",
   "scripts": {
+    "prepare": "npm run build",
     "serve": "vue-cli-service serve dev/serve.js",
     "build": "cross-env NODE_ENV=production rollup --config build/rollup.config.js",
     "build:ssr": "cross-env NODE_ENV=production rollup --config build/rollup.config.js --format cjs",
