@@ -161,8 +161,8 @@ export default {
     /**
      * Set the label number format for the scale.
      * STANDARD shows integer,
-     * FRACTIONAL shows 2 fixed decimal places,
-     * SCIENTIFIC shows to 2 significant digits
+     * FRACTIONAL shows to fixed decimal places,
+     * SCIENTIFIC shows to significant digits
      * @values STANDARD, FRACTIONAL, SCIENTIFIC
      */
     labelNumberFormat: {
@@ -417,7 +417,7 @@ export default {
     },
     /**
      * Force the tick orientation, default is based on gauge type
-     * @values NORMAL or TANGENT
+     * @values NORMAL, HORIZONTAL or TANGENT
      */
     tickLabelOrientation: {
       default: undefined,
