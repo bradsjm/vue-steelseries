@@ -92,6 +92,7 @@ export default {
     },
     /**
      * Number of fraction digits to show on scale
+     * When labelNumberFormat set to "FRACTIONAL"
      */
     fractionalScaleDecimals: {
       default: 1,
