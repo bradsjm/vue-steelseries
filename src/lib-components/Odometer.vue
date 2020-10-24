@@ -135,9 +135,13 @@ export default {
     size() {
       this.draw();
     },
-    value(newValue) {
-      this.gauge && this.gauge.setValueAnimated(toNumber(newValue));
-    },
+    odometerValue(newValue, oldValue) {
+      if (!this.gauge) return;
+      if (newValue > oldValue) {
+        this.gauge.setValueAnimated(toNumber(newValue));
+      } else {
+        this.gauge.setValue(toNumber(newValue));
+      }
   },
 };
 </script>
