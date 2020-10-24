@@ -1,6 +1,6 @@
 {
   "name": "vue-steelseries",
-  "version": "0.0.4",
+  "version": "1.0.0",
   "description": "Vue wrapper for the steelseries of gauge components for JavaScript",
   "main": "dist/vue-steelseries.ssr.js",
   "browser": "dist/vue-steelseries.esm.js",
